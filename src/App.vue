@@ -4,6 +4,8 @@
 
 <template>
   <v-app>
+    <AppBar />
+    <NavigationDrawer />
     <v-main>
       <router-view />
     </v-main>
