@@ -11,6 +11,9 @@ importers:
       '@mdi/font':
         specifier: 7.4.47
         version: 7.4.47
+      chart.js:
+        specifier: ^4.4.2
+        version: 4.4.2
       core-js:
         specifier: ^3.37.0
         version: 3.37.0
@@ -20,6 +23,9 @@ importers:
       vue:
         specifier: ^3.4.26
         version: 3.4.26(typescript@5.4.5)
+      vue-chartjs:
+        specifier: ^5.3.1
+        version: 5.3.1(chart.js@4.4.2)(vue@3.4.26(typescript@5.4.5))
       vuetify:
         specifier: ^3.6.3
         version: 3.6.3(typescript@5.4.5)(vite-plugin-vuetify@2.0.3)(vue@3.4.26(typescript@5.4.5))
@@ -337,6 +343,9 @@ packages:
   '@jsdevtools/ez-spawn@3.0.4':
     resolution: {integrity: sha512-f5DRIOZf7wxogefH03RjMPMdBF7ADTWUMoOs9kaJo06EfwF+aFhMZMDZxHg/Xe12hptN9xoZjGso2fdjapBRIA==}
     engines: {node: '>=10'}
+
+  '@kurkle/color@0.3.2':
+    resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
 
   '@mdi/font@7.4.47':
     resolution: {integrity: sha512-43MtGpd585SNzHZPcYowu/84Vz2a2g31TvPMTm9uTiCSWzaheQySUcSyUH/46fPnuPQWof2yd0pGBtzee/IQWw==}
@@ -784,6 +793,10 @@ packages:
 
   character-reference-invalid@1.1.4:
     resolution: {integrity: sha512-mKKUkUbhPpQlCOfIuZkvSEgktjPFIsZKRRbC6KWVEMvlzblj3i3asQv5ODsrwt0N3pHAEvjP8KTQPHkp0+6jOg==}
+
+  chart.js@4.4.2:
+    resolution: {integrity: sha512-6GD7iKwFpP5kbSD4MeRRRlTnQvxfQREy36uEtm1hzHzcOqwWx0YEHuspuoNlslu+nciLIB7fjjsHkUv/FzFcOg==}
+    engines: {pnpm: '>=8'}
 
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
@@ -1892,6 +1905,12 @@ packages:
       terser:
         optional: true
 
+  vue-chartjs@5.3.1:
+    resolution: {integrity: sha512-rZjqcHBxKiHrBl0CIvcOlVEBwRhpWAVf6rDU3vUfa7HuSRmGtCslc0Oc8m16oAVuk0erzc1FCtH1VCriHsrz+A==}
+    peerDependencies:
+      chart.js: ^4.1.1
+      vue: ^3.0.0-0 || ^2.7.0
+
   vue-demi@0.14.7:
     resolution: {integrity: sha512-EOG8KXDQNwkJILkx/gPcoL/7vH+hORoBaKgGe+6W7VFMvCYJfmF2dGbvgDroVnI8LU7/kTu8mbjRZGBU1z9NTA==}
     engines: {node: '>=12'}
@@ -2216,6 +2235,8 @@ snapshots:
       cross-spawn: 7.0.3
       string-argv: 0.3.2
       type-detect: 4.0.8
+
+  '@kurkle/color@0.3.2': {}
 
   '@mdi/font@7.4.47': {}
 
@@ -2726,6 +2747,10 @@ snapshots:
   character-entities@1.2.4: {}
 
   character-reference-invalid@1.1.4: {}
+
+  chart.js@4.4.2:
+    dependencies:
+      '@kurkle/color': 0.3.2
 
   chokidar@3.6.0:
     dependencies:
@@ -3895,6 +3920,11 @@ snapshots:
       '@types/node': 20.12.8
       fsevents: 2.3.3
       sass: 1.76.0
+
+  vue-chartjs@5.3.1(chart.js@4.4.2)(vue@3.4.26(typescript@5.4.5)):
+    dependencies:
+      chart.js: 4.4.2
+      vue: 3.4.26(typescript@5.4.5)
 
   vue-demi@0.14.7(vue@3.4.26(typescript@5.4.5)):
     dependencies:
