@@ -29,7 +29,7 @@ const headers = [
       <span>{{ item.emissions_scope_1_2.toLocaleString() }}</span>
     </template>
     <template #[`item.emissions_scope_3`]="{ item }">
-      <span>{{ item.emissions_scope_3.toLocaleString() }}</span>
+      <span>{{ item.emissions_scope_3?.toLocaleString() }}</span>
     </template>
   </v-data-table>
 </template>
