@@ -13,9 +13,11 @@ export default function benfordsLawDistribution(numbers: number[]): Distribution
 
   // Loop through numbers and count the first digit occurrences
   for (const num of numbers) {
-    const firstDigit: number = Number.parseInt(num.toString()[0])
-    if (firstDigit >= 1 && firstDigit <= 9)
-      observedDistribution[firstDigit - 1]++
+    if (num !== undefined && num !== null) {
+      const firstDigit: number = Number.parseInt(num.toString()[0])
+      if (firstDigit >= 1 && firstDigit <= 9)
+        observedDistribution[firstDigit - 1]++
+    }
   }
 
   // Calculate total count of observed digits
