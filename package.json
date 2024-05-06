@@ -1,5 +1,6 @@
 {
   "name": "vuetify-project-template",
+  "type": "module",
   "version": "0.0.0",
   "engines": {
     "node": ">=20.0.0"
@@ -8,12 +9,16 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "serve": "node --env-file=server/.env.local server/index.js"
   },
   "dependencies": {
     "@mdi/font": "7.4.47",
     "chart.js": "^4.4.2",
     "core-js": "^3.37.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.3",
     "roboto-fontface": "^0.10.0",
     "vue": "^3.4.26",
     "vue-chartjs": "^5.3.1",
