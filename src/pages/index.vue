@@ -1,22 +1,37 @@
 <script setup lang="ts">
 import { Bar } from 'vue-chartjs'
 import { BarElement, CategoryScale, Chart as ChartJS, Colors, Legend, LinearScale, Title, Tooltip } from 'chart.js'
+import { storeToRefs } from 'pinia'
 import benfordsLawDistribution from '../benfordsLawDistribution'
-import esgCompanies from '@/companiesData'
+import { useCountryEmissionStore } from '@/stores/countryEmission'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, Colors)
 
-const includeEmissionsScope1And2 = ref(true)
-const includeEmissionsScope3 = ref(true)
+// Emission Store
+const countryEmissionStore = useCountryEmissionStore()
+const { emissionsData, countries, years, loading } = storeToRefs(countryEmissionStore)
+const { fetchEmissionsData } = countryEmissionStore
 
+// Refs
+const selectedMetric = ref<string>('co2')
+const options = {
+  responsive: true,
+  plugins: {
+    colors: {
+      enabled: true,
+    },
+  },
+}
+
+// Computed properties
 const numbers = computed(() => {
-  return esgCompanies.flatMap((company) => {
+  return emissionsData.value.flatMap((country) => {
     const extractedNumbers = []
-    if (includeEmissionsScope1And2.value && company.emissions_scope_1_2 !== null)
-      extractedNumbers.push(company.emissions_scope_1_2)
+    if (selectedMetric.value === 'co2' && country.co2 !== null)
+      extractedNumbers.push(country.co2)
 
-    if (includeEmissionsScope3.value && company.emissions_scope_3 !== null)
-      extractedNumbers.push(company.emissions_scope_3)
+    if (selectedMetric.value === 'population' && country.population !== null)
+      extractedNumbers.push(country.population)
 
     return extractedNumbers
   })
@@ -32,14 +47,12 @@ const data = computed(() => ({
   ],
 }))
 
-const options = {
-  responsive: true,
-  plugins: {
-    colors: {
-      enabled: true,
-    },
-  },
-}
+// Lifecycle hooks
+
+onMounted(() => {
+  if (emissionsData.value.length === 0)
+    fetchEmissionsData()
+})
 </script>
 
 <template>
@@ -47,20 +60,59 @@ const options = {
     <v-col
       cols="12"
     >
-      <v-card>
+      <v-card
+        title="Data"
+        :loading
+      >
         <v-card-text>
-          <v-list>
-            <v-list-item title="Emissions: Tonnes of CO2e (Scope 1 & 2)">
+          <p>
+            Total: {{ emissionsData.length.toLocaleString() }}
+          </p>
+          <p>
+            Selected: {{ numbers.filter(num => num !== undefined && num !== null).length.toLocaleString() }}
+          </p>
+        </v-card-text>
+      </v-card>
+    </v-col>
+    <v-col
+      cols="12"
+    >
+      <v-card
+        title="Chart"
+        :loading
+      >
+        <v-card-text>
+          <Bar
+            :data
+            :options
+          />
+        </v-card-text>
+      </v-card>
+    </v-col>
+    <v-col
+      cols="12"
+      md="6"
+    >
+      <v-card title="Metrics">
+        <v-card-text>
+          <v-list height="500">
+            <v-list-item title="Annual CO₂ emissions (Million Tonnes)">
               <template #prepend>
                 <v-list-item-action start>
-                  <v-checkbox-btn v-model="includeEmissionsScope1And2" />
+                  <v-checkbox-btn
+                    v-model="selectedMetric"
+                    value="co2"
+                  />
                 </v-list-item-action>
               </template>
             </v-list-item>
-            <v-list-item title="Emissions: Tonnes of CO2e (Scope 3)">
+            <v-list-item title="Population (Persons)">
               <template #prepend>
                 <v-list-item-action start>
-                  <v-checkbox-btn v-model="includeEmissionsScope3" />
+                  <v-checkbox-btn
+                    v-model="selectedMetric"
+                    value="population"
+                  />
                 </v-list-item-action>
               </template>
             </v-list-item>
@@ -70,14 +122,60 @@ const options = {
     </v-col>
     <v-col
       cols="12"
+      md="6"
     >
-      <v-card>
+      <v-card
+        title="Countries"
+        :loading
+      >
         <v-card-text>
-          <!-- <canvas id="myChart" /> -->
-          <Bar
-            :data
-            :options
-          />
+          <p>Total: {{ countries.length.toLocaleString() }}</p>
+          <p>Selected: {{ countries.length.toLocaleString() }}</p>
+
+          <v-list
+            height="500"
+          >
+            <v-list-item
+              v-for="country in countries"
+              :key="country"
+              :title="country"
+            >
+              <template #prepend>
+                <v-list-item-action start>
+                  <v-checkbox-btn />
+                </v-list-item-action>
+              </template>
+            </v-list-item>
+          </v-list>
+        </v-card-text>
+      </v-card>
+    </v-col>
+    <v-col
+      cols="12"
+      md="6"
+    >
+      <v-card
+        title="Years"
+        :loading
+      >
+        <v-card-text>
+          <p>Total: {{ years.length.toLocaleString() }}</p>
+          <p>Selected: {{ years.length.toLocaleString() }}</p>
+          <v-list
+            height="500"
+          >
+            <v-list-item
+              v-for="year in years"
+              :key="year"
+              :title="year"
+            >
+              <template #prepend>
+                <v-list-item-action start>
+                  <v-checkbox-btn />
+                </v-list-item-action>
+              </template>
+            </v-list-item>
+          </v-list>
         </v-card-text>
       </v-card>
     </v-col>
