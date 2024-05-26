@@ -10,6 +10,7 @@ const { loading, emissionsData, co2Emissions } = storeToRefs(useCountryEmissionS
     title="Data"
     prepend-icon="mdi-database-outline"
     :loading
+    height="100%"
   >
     <v-card-text>
       <p>

@@ -10,14 +10,6 @@ const filteredCountries = computed(() => {
   return countries.value.filter(country => country.toLowerCase().includes(countrySearch.value.toLowerCase()))
 })
 
-// Toggle country selection
-function toggleCountrySelection(country: string) {
-  if (selectedCountries.value.has(country))
-    selectedCountries.value.delete(country)
-  else
-    selectedCountries.value.add(country)
-}
-
 // Check if all countries are selected
 const areAllCountriesSelected = computed(() => {
   return filteredCountries.value.every(country => selectedCountries.value.has(country))
@@ -27,6 +19,20 @@ const areAllCountriesSelected = computed(() => {
 const areSomeCountriesSelected = computed(() => {
   return selectedCountries.value.size > 0
 })
+
+// If loading is false, select all countries
+watch(loading, (newVal) => {
+  if (!newVal)
+    selectAllCountries()
+})
+
+// Toggle country selection
+function toggleCountrySelection(country: string) {
+  if (selectedCountries.value.has(country))
+    selectedCountries.value.delete(country)
+  else
+    selectedCountries.value.add(country)
+}
 
 // Select all countries if none are selected, deselect all countries if all are selected
 function toggleSelectAll() {
@@ -43,7 +49,7 @@ function deselectAllCountries() {
 
 // Select all countries
 function selectAllCountries() {
-  filteredCountries.value.forEach(country => selectedCountries.value.add(country))
+  countries.value.forEach(country => selectedCountries.value.add(country))
 }
 </script>
 
@@ -62,6 +68,7 @@ function selectAllCountries() {
       <v-text-field
         v-model="countrySearch"
         placeholder="Search country"
+        clearable
       />
       <v-list>
         <v-list-item
