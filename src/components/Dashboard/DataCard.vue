@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { useCountryEmissionStore } from '@/stores/countryEmission'
 
-const { loading, emissionsData, co2Emissions } = storeToRefs(useCountryEmissionStore())
+const { loading, selectedEmissions, displayedEmissions } = storeToRefs(useCountryEmissionStore())
 </script>
 
 <template>
@@ -14,10 +14,10 @@ const { loading, emissionsData, co2Emissions } = storeToRefs(useCountryEmissionS
   >
     <v-card-text>
       <p>
-        Total: {{ emissionsData.length.toLocaleString() }}
+        Total: {{ selectedEmissions.length.toLocaleString() }}
       </p>
       <p>
-        Selected: {{ co2Emissions.length.toLocaleString() }}
+        Selected: {{ displayedEmissions.length.toLocaleString() }}
       </p>
       <RouterLink to="/reports">
         View Dataset

@@ -22,7 +22,7 @@
       order="2"
       order-md="1"
     >
-      <GasSelectCard />
+      <EmissionTypeCard />
     </v-col>
 
     <!-- Countries Card -->

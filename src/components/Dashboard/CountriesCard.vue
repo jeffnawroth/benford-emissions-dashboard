@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { useCountryEmissionStore } from '@/stores/countryEmission'
 
-const { loading, countries, selectedCountries } = storeToRefs(useCountryEmissionStore())
+const { loading, countries, selectedCountries, selectedEmissionType } = storeToRefs(useCountryEmissionStore())
 const countrySearch = ref<string>('')
 
 // Filter countries based on search
@@ -24,6 +24,11 @@ const areSomeCountriesSelected = computed(() => {
 watch(loading, (newVal) => {
   if (!newVal)
     selectAllCountries()
+})
+
+watch(selectedEmissionType, () => {
+  deselectAllCountries()
+  selectAllCountries()
 })
 
 // Toggle country selection
