@@ -3,11 +3,13 @@ import router from '@/router';
   <v-app-bar
     flat
     app
-    title="Benford Emissions Dashboard"
   >
-    <v-btn
-      icon="mdi-table"
-      @click="$router.push('/reports')"
+    <v-app-bar-title
+      class="cursor-pointer"
+      @click="$router.push('/')"
+    >
+      Benford Emissions Dashboard
+    </v-app-bar-title>
     />
     <v-btn
       icon="mdi-view-dashboard"
