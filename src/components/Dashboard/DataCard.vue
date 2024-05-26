@@ -19,7 +19,7 @@ const { loading, selectedEmissions, displayedEmissions } = storeToRefs(useCountr
       <p>
         Selected: {{ displayedEmissions.length.toLocaleString() }}
       </p>
-      <RouterLink to="/reports">
+      <RouterLink to="/emissions">
         View Dataset
       </RouterLink>
     </v-card-text>
