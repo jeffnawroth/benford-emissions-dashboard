@@ -7,6 +7,7 @@ const { selectedEmissionType } = storeToRefs(useCountryEmissionStore())
 
 <template>
   <v-card
+    prepend-icon="mdi-factory"
     title="Emission Type"
   >
     <v-card-text>
