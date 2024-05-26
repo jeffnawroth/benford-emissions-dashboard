@@ -3,11 +3,12 @@ import { storeToRefs } from 'pinia'
 import { useCountryEmissionStore } from '@/stores/countryEmission'
 
 const { loading, countries, selectedCountries, selectedEmissionType } = storeToRefs(useCountryEmissionStore())
-const countrySearch = ref<string>('')
+const countrySearch = ref<string | null>('')
 
 // Filter countries based on search
 const filteredCountries = computed(() => {
-  return countries.value.filter(country => country.toLowerCase().includes(countrySearch.value.toLowerCase()))
+  const searchQuery = countrySearch.value ? countrySearch.value.toLowerCase() : ''
+  return countries.value.filter(country => country.toLowerCase().includes(searchQuery.toLowerCase()))
 })
 
 // Check if all countries are selected
