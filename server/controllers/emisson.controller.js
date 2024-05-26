@@ -3,7 +3,7 @@ import { Emission } from '../model/Emission.js'
 // Get all Country Emissions
 async function getEmissions(req, res) {
   try {
-    const emissions = await Emission.find()
+    const emissions = await Emission.find({}, 'country year iso_code population co2')
     res.status(200).json(emissions)
   }
   catch (error) {
