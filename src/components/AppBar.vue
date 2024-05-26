@@ -3,7 +3,7 @@ import router from '@/router';
   <v-app-bar
     flat
     app
-    title="ESG Fraud Dashboard"
+    title="Benford Emissions Dashboard"
   >
     <v-btn
       icon="mdi-file-document-multiple-outline"
