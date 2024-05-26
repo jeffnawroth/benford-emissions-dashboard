@@ -6,7 +6,7 @@ import router from '@/router';
     title="Benford Emissions Dashboard"
   >
     <v-btn
-      icon="mdi-file-document-multiple-outline"
+      icon="mdi-table"
       @click="$router.push('/reports')"
     />
     <v-btn
