@@ -7,7 +7,7 @@ import { useCountryEmissionStore } from '@/stores/countryEmission'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, Colors)
 
-const { loading, selectedCo2Emissions, selectedEmissionType } = storeToRefs(useCountryEmissionStore())
+const { loading, displayedEmissions, selectedEmissionType } = storeToRefs(useCountryEmissionStore())
 
 const options = {
   responsive: true,
@@ -18,7 +18,7 @@ const options = {
   },
 }
 
-const result = computed(() => benfordsLawDistribution(selectedCo2Emissions.value))
+const result = computed(() => benfordsLawDistribution(displayedEmissions.value))
 
 const data = computed(() => ({
   labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
