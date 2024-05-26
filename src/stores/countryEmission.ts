@@ -11,6 +11,10 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
 
   const years = computed(() => [...new Set(emissionsData.value.map(data => data.year))].sort())
 
+  const co2Emissions = computed(() => {
+    return emissionsData.value.map(country => country.co2).filter(co2 => co2 !== null && co2 !== undefined)
+  })
+
   async function fetchEmissionsData() {
     try {
       loading.value = true
@@ -26,5 +30,5 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
     }
   }
 
-  return { fetchEmissionsData, emissionsData, loading, countries, years }
+  return { fetchEmissionsData, emissionsData, loading, countries, years, co2Emissions }
 })
