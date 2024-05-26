@@ -3,10 +3,12 @@
 </script>
 
 <template>
-  <v-card>
+  <v-card
+    title="Gas"
+    prepend-icon="mdi-molecule-co2"
+  >
     <v-card-text>
       <v-select
-        label="GAS"
         :items="['CO₂']"
       />
     </v-card-text>

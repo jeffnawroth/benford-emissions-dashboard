@@ -31,9 +31,10 @@ const data = computed(() => ({
 
 <template>
   <v-card
-    title="Annual Annual CO₂ emissions"
+    title="Annual CO₂ emissions"
     subtitle="Carbon dioxide (CO₂) emissions from fossil fuels and industry. Land-use change is not included."
     :loading
+    prepend-icon="mdi-chart-bar"
   >
     <v-card-text>
       <Bar

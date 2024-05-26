@@ -8,6 +8,7 @@ const { loading, emissionsData, co2Emissions } = storeToRefs(useCountryEmissionS
 <template>
   <v-card
     title="Data"
+    prepend-icon="mdi-database-outline"
     :loading
   >
     <v-card-text>
@@ -17,6 +18,9 @@ const { loading, emissionsData, co2Emissions } = storeToRefs(useCountryEmissionS
       <p>
         Selected: {{ co2Emissions.filter(num => num !== undefined && num !== null).length.toLocaleString() }}
       </p>
+      <RouterLink to="/reports">
+        View Dataset
+      </RouterLink>
     </v-card-text>
   </v-card>
 </template>
