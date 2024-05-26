@@ -37,6 +37,7 @@ const subtitle = computed(() => selectedEmissionType.value === 'CO₂' ? 'Carbon
     :title
     :loading
     prepend-icon="mdi-chart-bar"
+    height="750"
   >
     <v-card-subtitle class="subtitle">
       {{ subtitle }}
