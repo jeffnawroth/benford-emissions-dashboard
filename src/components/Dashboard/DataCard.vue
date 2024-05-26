@@ -16,7 +16,7 @@ const { loading, emissionsData, co2Emissions } = storeToRefs(useCountryEmissionS
         Total: {{ emissionsData.length.toLocaleString() }}
       </p>
       <p>
-        Selected: {{ co2Emissions.filter(num => num !== undefined && num !== null).length.toLocaleString() }}
+        Selected: {{ co2Emissions.length.toLocaleString() }}
       </p>
       <RouterLink to="/reports">
         View Dataset

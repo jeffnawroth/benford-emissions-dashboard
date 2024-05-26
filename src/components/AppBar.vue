@@ -10,7 +10,6 @@ import router from '@/router';
     >
       Benford Emissions Dashboard
     </v-app-bar-title>
-    />
     <v-btn
       icon="mdi-view-dashboard"
       @click="$router.push('/')"

@@ -2,10 +2,10 @@
 import { storeToRefs } from 'pinia'
 import { useCountryEmissionStore } from '@/stores/countryEmission'
 
-const { loading, countries } = storeToRefs(useCountryEmissionStore())
+const { loading, countries, selectedCountries } = storeToRefs(useCountryEmissionStore())
 const countrySearch = ref<string>('')
-const selectedCountries = ref<Set<string>>(new Set())
 
+// Filter countries based on search
 const filteredCountries = computed(() => {
   return countries.value.filter(country => country.toLowerCase().includes(countrySearch.value.toLowerCase()))
 })
@@ -54,8 +54,10 @@ function selectAllCountries() {
     prepend-icon="mdi-earth"
   >
     <v-card-text>
-      <!-- <p>Total: {{ countries.length.toLocaleString() }}</p>
-          <p>Selected: {{ countries.length.toLocaleString() }}</p> -->
+      <div class="mb-2">
+        <p>Total: {{ countries.length.toLocaleString() }}</p>
+        <p>Selected: {{ selectedCountries.size.toLocaleString() }}</p>
+      </div>
 
       <v-text-field
         v-model="countrySearch"
@@ -80,7 +82,7 @@ function selectAllCountries() {
 
       <v-list
         class="overflow-y-auto"
-        height="520"
+        height="473"
       >
         <v-list-item
           v-for="country in filteredCountries"
@@ -94,6 +96,16 @@ function selectAllCountries() {
             </v-list-item-action>
           </template>
         </v-list-item>
+
+        <template
+          v-if="loading"
+        >
+          <v-skeleton-loader
+            v-for="i in 10"
+            :key="i"
+            type="list-item"
+          />
+        </template>
       </v-list>
     </v-card-text>
   </v-card>
