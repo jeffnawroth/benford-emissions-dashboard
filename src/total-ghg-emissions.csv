@@ -1,4 +1,4 @@
-country,iso-code,year,total_ghg
+country,iso_code,year,total_ghg
 Afghanistan,AFG,1850,7338819
 Afghanistan,AFG,1851,7403982.5
 Afghanistan,AFG,1852,7464157
