@@ -16,5 +16,6 @@ declare module 'vue' {
     NavigationDrawer: typeof import('./components/NavigationDrawer.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SliderCard: typeof import('./components/Dashboard/SliderCard.vue')['default']
   }
 }

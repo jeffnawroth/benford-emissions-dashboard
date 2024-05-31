@@ -20,6 +20,7 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
   const loading = ref(false)
   const selectedCountries = ref<Set<string>>(new Set())
   const selectedEmissionType = ref('CO₂')
+  const slider = ref(0)
 
   // Computed properties
 
@@ -39,14 +40,14 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
 
   // Get a list of CO2 emissions from the selected countries
   const selectedCo2Emissions = computed(() => {
-    return co2EmissionsData.value.filter(data => selectedCountries.value.has(data.country))
+    return co2EmissionsData.value.filter(data => selectedCountries.value.has(data.country) && data.year >= slider.value)
       .map(data => data.co2)
       .filter(co2 => co2 !== null && co2 !== undefined)
   })
 
   // Get a list of GHG emissions from the selected countries
   const selectedGhgEmissions = computed(() => {
-    return ghgEmissionsData.value.filter(data => selectedCountries.value.has(data.country))
+    return ghgEmissionsData.value.filter(data => selectedCountries.value.has(data.country) && data.year >= slider.value)
       .map(data => data.total_ghg)
       .filter(ghg => ghg !== null && ghg !== undefined)
   })
@@ -90,5 +91,5 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
     }
   }
 
-  return { fetchCO2EmissionsData, fetchGHGEmissionsData, co2EmissionsData, ghgEmissionsData, loading, countries, years, selectedCo2Emissions, selectedGhgEmissions, selectedCountries, selectedEmissionType, selectedEmissions, displayedEmissions }
+  return { fetchCO2EmissionsData, fetchGHGEmissionsData, co2EmissionsData, ghgEmissionsData, loading, countries, years, selectedCo2Emissions, selectedGhgEmissions, selectedCountries, selectedEmissionType, selectedEmissions, displayedEmissions, slider }
 })

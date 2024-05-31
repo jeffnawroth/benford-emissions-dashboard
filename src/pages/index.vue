@@ -19,7 +19,7 @@
     <v-col
       cols="12"
       md="9"
-      order="2"
+      order="3"
       order-md="1"
     >
       <EmissionTypeCard />
@@ -27,7 +27,7 @@
 
     <!-- Countries Card -->
     <v-col
-      order="3"
+      order="4"
       cols="12"
       md="3"
       order-md="2"
@@ -43,6 +43,15 @@
       order-md="3"
     >
       <BarChartCard />
+    </v-col>
+    <v-col
+      cols="12"
+      md="9"
+      offset-md="3"
+      order="2"
+      order-md="4"
+    >
+      <SliderCard />
     </v-col>
   </v-row>
 </template>
