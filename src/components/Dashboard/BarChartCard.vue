@@ -30,6 +30,7 @@ const data = computed(() => ({
 
 const title = computed(() => selectedEmissionType.value === 'CO₂' ? 'Annual CO₂ emissions' : 'Greenhouse gas emissions')
 const subtitle = computed(() => selectedEmissionType.value === 'CO₂' ? 'Carbon dioxide (CO₂) emissions from fossil fuels and industry. Land-use change is not included.' : 'Greenhouse gas emissions include carbon dioxide, methane and nitrous oxide from all sources, including land-use change. They are measured in tonnes of carbon dioxide-equivalents over a 100-year timescale.')
+const dataSourceCitation = computed(() => selectedEmissionType.value === 'CO₂' ? 'Global Carbon Budget (2023) – with major processing by Our World in Data' : 'Jones et al. (2024) – with major processing by Our World in Data')
 </script>
 
 <template>
@@ -37,7 +38,7 @@ const subtitle = computed(() => selectedEmissionType.value === 'CO₂' ? 'Carbon
     :title
     :loading
     prepend-icon="mdi-chart-bar"
-    height="750"
+    height="800"
   >
     <v-card-subtitle class="subtitle">
       {{ subtitle }}
@@ -47,6 +48,9 @@ const subtitle = computed(() => selectedEmissionType.value === 'CO₂' ? 'Carbon
         :data
         :options
       />
+      <p class="mt-4">
+        <span class="font-weight-bold">Data source: </span>{{ dataSourceCitation }}
+      </p>
     </v-card-text>
   </v-card>
 </template>

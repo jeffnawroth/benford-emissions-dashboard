@@ -64,7 +64,7 @@ function selectAllCountries() {
     :loading
     title="Countries"
     prepend-icon="mdi-earth"
-    height="750"
+    height="800"
   >
     <v-card-text>
       <div class="mb-2">
