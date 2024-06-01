@@ -51,6 +51,7 @@ const dataSourceCitation = computed(() => selectedEmissionType.value === 'CO₂'
       <p class="mt-4">
         <span class="font-weight-bold">Data source: </span>{{ dataSourceCitation }}
       </p>
+      <SliderCard flat />
     </v-card-text>
   </v-card>
 </template>

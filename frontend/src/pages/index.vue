@@ -44,14 +44,5 @@
     >
       <BarChartCard />
     </v-col>
-    <v-col
-      cols="12"
-      lg="9"
-      offset-lg="3"
-      order="2"
-      order-lg="4"
-    >
-      <SliderCard />
-    </v-col>
   </v-row>
 </template>
