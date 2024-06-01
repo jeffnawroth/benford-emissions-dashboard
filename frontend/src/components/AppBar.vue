@@ -20,7 +20,6 @@ onMounted(() => {
 
 <template>
   <v-app-bar
-    flat
     app
   >
     <v-app-bar-title
