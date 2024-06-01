@@ -11,6 +11,9 @@ importers:
       cors:
         specifier: ^2.8.5
         version: 2.8.5
+      csv-parser:
+        specifier: ^3.0.0
+        version: 3.0.0
       express:
         specifier: ^4.19.2
         version: 4.19.2
@@ -19,10 +22,10 @@ importers:
         version: 8.4.1
     devDependencies:
       '@antfu/eslint-config':
-        specifier: ^2.12.2
+        specifier: ^2.19.2
         version: 2.19.2(@vue/compiler-sfc@3.4.27)(eslint@9.4.0)(typescript@5.4.5)
       eslint:
-        specifier: ^9.0.0
+        specifier: ^9.4.0
         version: 9.4.0
 
 packages:
@@ -473,6 +476,11 @@ packages:
   cssesc@3.0.0:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
     engines: {node: '>=4'}
+    hasBin: true
+
+  csv-parser@3.0.0:
+    resolution: {integrity: sha512-s6OYSXAK3IdKqYO33y09jhypG/bSDHPuyCme/IdEHfWpLf/jKcpitVFyOC6UemgGk8v7Q5u2XE0vvwmanxhGlQ==}
+    engines: {node: '>= 10'}
     hasBin: true
 
   debug@2.6.9:
@@ -1116,6 +1124,9 @@ packages:
   minimatch@9.0.4:
     resolution: {integrity: sha512-KqWh+VchfxcMNRAJjj2tnsSJdNbHsVgnkBhTNrW7AjVo6OvLtxw8zfT9oLw1JSohlFzJ8jCoTgaoXvJ+kHt6fw==}
     engines: {node: '>=16 || 14 >=14.17'}
+
+  minimist@1.2.8:
+    resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
 
   mlly@1.7.0:
     resolution: {integrity: sha512-U9SDaXGEREBYQgfejV97coK0UL1r+qnF2SyO9A3qcI8MzKnsIFKHNVEkrDyNncQTKQQumsasmeq84eNMdBfsNQ==}
@@ -2176,6 +2187,10 @@ snapshots:
 
   cssesc@3.0.0: {}
 
+  csv-parser@3.0.0:
+    dependencies:
+      minimist: 1.2.8
+
   debug@2.6.9:
     dependencies:
       ms: 2.0.0
@@ -2884,6 +2899,8 @@ snapshots:
   minimatch@9.0.4:
     dependencies:
       brace-expansion: 2.0.1
+
+  minimist@1.2.8: {}
 
   mlly@1.7.0:
     dependencies:

@@ -2,8 +2,8 @@ import { Schema, model } from 'mongoose'
 
 const CO2EmissionSchema = new Schema({
   country: { type: String, required: true },
+  iso_code: { type: String },
   year: { type: Number, required: true },
-  iso_code: { type: String, required: true },
   co2: { type: Number, required: true },
 })
 
