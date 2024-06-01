@@ -2,7 +2,7 @@
 import { Bar } from 'vue-chartjs'
 import { BarElement, CategoryScale, Chart as ChartJS, Colors, Legend, LinearScale, Title, Tooltip } from 'chart.js'
 import { storeToRefs } from 'pinia'
-import benfordsLawDistribution from '../../benfordsLawDistribution'
+import benfordsLawDistribution from '../../../benfordsLawDistribution'
 import { useCountryEmissionStore } from '@/stores/countryEmission'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, Colors)
@@ -29,7 +29,6 @@ const data = computed(() => ({
 }))
 
 const title = computed(() => selectedEmissionType.value === 'CO₂' ? 'Annual CO₂ emissions' : 'Greenhouse gas emissions')
-const subtitle = computed(() => selectedEmissionType.value === 'CO₂' ? 'Carbon dioxide (CO₂) emissions from fossil fuels and industry. Land-use change is not included.' : 'Greenhouse gas emissions include carbon dioxide, methane and nitrous oxide from all sources, including land-use change. They are measured in tonnes of carbon dioxide-equivalents over a 100-year timescale.')
 const dataSourceCitation = computed(() => selectedEmissionType.value === 'CO₂' ? 'Global Carbon Budget (2023) – with major processing by Our World in Data' : 'Jones et al. (2024) – with major processing by Our World in Data')
 </script>
 
@@ -41,8 +40,34 @@ const dataSourceCitation = computed(() => selectedEmissionType.value === 'CO₂'
     height="800"
   >
     <v-card-subtitle class="subtitle">
-      {{ subtitle }}
+      <template
+        v-if="selectedEmissionType === 'CO₂' "
+      >
+        Carbon dioxide (CO₂) emissions from
+
+        <Co2SubtitleTooltip activator="fossil fuels and industry" />
+
+        . Land-use change is not included.
+      </template>
+
+      <template v-else>
+        <GhgSubtitleTooltip>
+          <template #first-activator>
+            Greenhouse gas emissions
+          </template>
+        </GhgSubtitleTooltip>
+
+        include carbon dioxide, methane and nitrous oxide from all sources, including land-use change. They are measured
+        in tonnes of
+
+        <GhgSubtitleTooltip>
+          <template #second-activator>
+            carbon dioxide-equivalents
+          </template>
+        </GhgSubtitleTooltip>  over a 100-year timescale.
+      </template>
     </v-card-subtitle>
+
     <v-card-text>
       <Bar
         :data
@@ -55,7 +80,7 @@ const dataSourceCitation = computed(() => selectedEmissionType.value === 'CO₂'
   </v-card>
 </template>
 
-<style scoped>
+<style>
 .subtitle {
   white-space: normal;
   overflow: visible;
