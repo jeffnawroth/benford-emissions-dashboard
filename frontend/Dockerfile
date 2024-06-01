@@ -1,8 +1,18 @@
-FROM node:lts-alpine
+FROM node:lts-alpine as build-stage
+
 WORKDIR /app
-COPY package*.json ./
-RUN npm install -g pnpm
-RUN pnpm install
+RUN corepack enable
+
+COPY package.json pnpm-lock.yaml ./
+RUN --mount=type=cache,id=pnpm-store,target=/root/.pnpm-store \
+    pnpm install --frozen-lockfile
+
 COPY . .
-EXPOSE 3000
-CMD ["pnpm", "dev"]
+RUN pnpm build
+
+FROM nginx:stable-alpine as production-stage
+
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
