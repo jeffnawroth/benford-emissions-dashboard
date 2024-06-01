@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node --env-file=.env.local index.js",
+    "lint": "eslint . --fix"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.12.2",
+    "eslint": "^9.0.0"
+  }
+}
