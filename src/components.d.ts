@@ -23,6 +23,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SliderCard: typeof import('./components/Dashboard/SliderCard.vue')['default']
+    Subtitle: typeof import('./components/Dashboard/BarChartCard/Subtitle/Subtitle.vue')['default']
     SubtitleTooltip: typeof import('./components/Dashboard/BarChartCard/Subtitle/SubtitleTooltip.vue')['default']
   }
 }

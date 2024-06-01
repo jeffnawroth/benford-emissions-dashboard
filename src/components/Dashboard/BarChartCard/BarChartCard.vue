@@ -40,32 +40,7 @@ const dataSourceCitation = computed(() => selectedEmissionType.value === 'CO₂'
     height="800"
   >
     <v-card-subtitle class="subtitle">
-      <template
-        v-if="selectedEmissionType === 'CO₂' "
-      >
-        Carbon dioxide (CO₂) emissions from
-
-        <Co2SubtitleTooltip activator="fossil fuels and industry" />
-
-        . Land-use change is not included.
-      </template>
-
-      <template v-else>
-        <GhgSubtitleTooltip>
-          <template #first-activator>
-            Greenhouse gas emissions
-          </template>
-        </GhgSubtitleTooltip>
-
-        include carbon dioxide, methane and nitrous oxide from all sources, including land-use change. They are measured
-        in tonnes of
-
-        <GhgSubtitleTooltip>
-          <template #second-activator>
-            carbon dioxide-equivalents
-          </template>
-        </GhgSubtitleTooltip>  over a 100-year timescale.
-      </template>
+      <Subtitle />
     </v-card-subtitle>
 
     <v-card-text>
