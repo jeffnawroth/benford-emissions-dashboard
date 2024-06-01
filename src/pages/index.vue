@@ -8,7 +8,7 @@
   >
     <!-- Data Card -->
     <v-col
-      md="3"
+      lg="3"
       cols="12"
       order="0"
     >
@@ -18,9 +18,9 @@
     <!-- GAS Select Card -->
     <v-col
       cols="12"
-      md="9"
+      lg="9"
       order="3"
-      order-md="1"
+      order-lg="1"
     >
       <EmissionTypeCard />
     </v-col>
@@ -29,8 +29,8 @@
     <v-col
       order="4"
       cols="12"
-      md="3"
-      order-md="2"
+      lg="3"
+      order-lg="2"
     >
       <CountriesCard />
     </v-col>
@@ -38,18 +38,18 @@
     <!-- Bar Chart Card -->
     <v-col
       cols="12"
-      md="9"
+      lg="9"
       order="1"
-      order-md="3"
+      order-lg="3"
     >
       <BarChartCard />
     </v-col>
     <v-col
       cols="12"
-      md="9"
-      offset-md="3"
+      lg="9"
+      offset-lg="3"
       order="2"
-      order-md="4"
+      order-lg="4"
     >
       <SliderCard />
     </v-col>

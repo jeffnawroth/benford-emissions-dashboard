@@ -37,7 +37,7 @@ const dataSourceCitation = computed(() => selectedEmissionType.value === 'CO₂'
     :title
     :loading
     prepend-icon="mdi-chart-bar"
-    height="800"
+    height="100%"
   >
     <v-card-subtitle class="subtitle">
       <Subtitle />
