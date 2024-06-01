@@ -12,8 +12,6 @@ services:
       - "8080:8080"
     environment:
       - DB_CONNECTION_STRING=mongodb://mongo:27017/emissions
-    volumes:
-      - ./backend/data:/app/data
     depends_on:
       - mongo
 
@@ -21,8 +19,3 @@ services:
     image: mongo:latest
     ports:
       - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
-
-volumes:
-  mongo-data:
