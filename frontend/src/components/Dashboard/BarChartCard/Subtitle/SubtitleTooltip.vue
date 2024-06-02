@@ -18,7 +18,7 @@ const splittedText = text.split(/(?<=\.)\s+/)
   <v-menu
     open-on-hover
     max-height="350"
-    width="350"
+    max-width="350"
   >
     <template #activator="{ props }">
       <span
@@ -44,18 +44,14 @@ const splittedText = text.split(/(?<=\.)\s+/)
           name="text"
         >
           <div
-            v-for="(text, index) in splittedText"
-            :key="text"
+            v-for="(textPart, index) in splittedText"
+            :key="textPart"
           >
-            <template
-              v-if="index < splittedText.length - 1"
-            >
-              <p>
-                {{ text }}
-              </p>
+            <p>
+              {{ textPart }}
+            </p>
 
-              <br>
-            </template>
+            <br v-if="index !== splittedText.length - 1">
           </div>
         </slot>
       </v-card-text>

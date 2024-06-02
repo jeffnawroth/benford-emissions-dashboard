@@ -76,6 +76,7 @@ function selectAllCountries() {
         v-model="countrySearch"
         placeholder="Search country"
         clearable
+        hide-details
       />
       <v-list>
         <v-list-item

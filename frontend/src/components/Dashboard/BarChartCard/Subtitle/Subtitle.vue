@@ -11,9 +11,8 @@ const { selectedEmissionType } = storeToRefs(useCountryEmissionStore())
   >
     Carbon dioxide (CO₂) emissions from
 
-    <Co2SubtitleTooltip activator="fossil fuels and industry" />
-
-    . Land-use change is not included.
+    <Co2SubtitleTooltip activator="fossil fuels and industry" />.
+    Land-use change is not included.
   </template>
 
   <template v-else>
