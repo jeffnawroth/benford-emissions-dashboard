@@ -64,7 +64,6 @@ function selectAllCountries() {
     :loading
     title="Countries"
     prepend-icon="mdi-earth"
-    height="800"
   >
     <v-card-text>
       <div class="mb-2">
@@ -97,7 +96,7 @@ function selectAllCountries() {
 
       <v-list
         class="overflow-y-auto"
-        height="500"
+        max-height="30vh"
       >
         <v-list-item
           v-for="country in filteredCountries"

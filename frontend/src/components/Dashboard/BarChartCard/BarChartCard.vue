@@ -38,7 +38,6 @@ const dataSourceCitation = computed(() => selectedEmissionType.value === 'CO₂'
     title="Emissions Analysis According to Benford’s Law"
     :loading
     prepend-icon="mdi-calculator-variant-outline"
-    height="100%"
   >
     <v-card-subtitle>
       Comparison of Expected and Observed Emission Data Using
