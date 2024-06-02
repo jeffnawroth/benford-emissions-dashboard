@@ -64,11 +64,13 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
 
   // Methods
 
+  const URL = import.meta.env.BACKEND_URL || 'http://localhost:8080'
+
   // Fetch emissions data from the API
   async function fetchCO2EmissionsData() {
     try {
       loading.value = true
-      const response = await fetch('http://localhost:8080/co2_emissions/')
+      const response = await fetch(`${URL}/co2_emissions/`)
       const data = await response.json()
       co2EmissionsData.value = data
     }
@@ -84,7 +86,7 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
   async function fetchGHGEmissionsData() {
     try {
       loading.value = true
-      const response = await fetch('http://localhost:8080/ghg_emissions/')
+      const response = await fetch(`${URL}/ghg_emissions/`)
       const data = await response.json()
       ghgEmissionsData.value = data
     }
