@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import benfordsLawDistribution from '@/benfordsLawDistribution'
 
 interface CO2EmissionData {
   country: string
@@ -57,6 +58,10 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
     return selectedEmissionType.value === 'CO₂' ? selectedCo2Emissions.value : selectedGhgEmissions.value
   })
 
+  const benfordsDistribution = computed(() => {
+    return benfordsLawDistribution(displayedEmissions.value)
+  })
+
   // Methods
 
   // Fetch emissions data from the API
@@ -91,5 +96,5 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
     }
   }
 
-  return { fetchCO2EmissionsData, fetchGHGEmissionsData, co2EmissionsData, ghgEmissionsData, loading, countries, years, selectedCo2Emissions, selectedGhgEmissions, selectedCountries, selectedEmissionType, selectedEmissions, displayedEmissions, slider }
+  return { fetchCO2EmissionsData, fetchGHGEmissionsData, co2EmissionsData, ghgEmissionsData, loading, countries, years, selectedCo2Emissions, selectedGhgEmissions, selectedCountries, selectedEmissionType, selectedEmissions, displayedEmissions, slider, benfordsDistribution }
 })

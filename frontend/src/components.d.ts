@@ -16,6 +16,8 @@ declare module 'vue' {
     Co2SubtitleTooltip: typeof import('./components/Dashboard/BarChartCard/Subtitle/Co2SubtitleTooltip.vue')['default']
     CountriesCard: typeof import('./components/Dashboard/CountriesCard.vue')['default']
     DataCard: typeof import('./components/Dashboard/DataCard.vue')['default']
+    DataTable: typeof import('./components/Dashboard/BarChartCard/DataTable.vue')['default']
+    DistributionDataTable: typeof import('./components/Dashboard/BarChartCard/DistributionDataTable.vue')['default']
     EmissionTypeCard: typeof import('./components/Dashboard/EmissionTypeCard.vue')['default']
     GasSelectCard: typeof import('./components/Dashboard/GasSelectCard.vue')['default']
     GhgSubtitleTooltip: typeof import('./components/Dashboard/BarChartCard/Subtitle/GhgSubtitleTooltip.vue')['default']

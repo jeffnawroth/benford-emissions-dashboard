@@ -9,6 +9,8 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale,
 
 const { loading, displayedEmissions, selectedEmissionType } = storeToRefs(useCountryEmissionStore())
 
+const text = ref('chart')
+
 const options = {
   responsive: true,
   plugins: {
@@ -44,10 +46,41 @@ const dataSourceCitation = computed(() => selectedEmissionType.value === 'CO₂'
     </v-card-subtitle>
 
     <v-card-text>
+      <v-row>
+        <v-col
+          cols="12"
+        >
+          <v-btn-toggle
+            v-model="text"
+            divided
+            mandatory
+            border="sm"
+            density="compact"
+          >
+            <v-btn
+              value="chart"
+              prepend-icon="mdi-chart-bar"
+            >
+              Chart
+            </v-btn>
+
+            <v-btn
+              prepend-icon="mdi-table"
+              value="table"
+            >
+              Table
+            </v-btn>
+          </v-btn-toggle>
+        </v-col>
+      </v-row>
+
       <Bar
+        v-if="text === 'chart'"
         :data
         :options
       />
+      <DistributionDataTable v-else />
+
       <p class="mt-4">
         <span class="font-weight-bold">Data source: </span>{{ dataSourceCitation }}
       </p>
