@@ -64,7 +64,7 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
 
   // Methods
 
-  const URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'
+  const URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8080'
 
   // Fetch emissions data from the API
   async function fetchCO2EmissionsData() {
