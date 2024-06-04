@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { useCountryEmissionStore } from '@/stores/countryEmission'
 
-const { selectedEmissions, displayedEmissions } = storeToRefs(useCountryEmissionStore())
+const { validSelectedEmissionTypeEmissions, filteredSelectedEmissionTypeEmissions, rawSelectedEmissionTypeEmissions } = storeToRefs(useCountryEmissionStore())
 </script>
 
 <template>
@@ -10,17 +10,29 @@ const { selectedEmissions, displayedEmissions } = storeToRefs(useCountryEmission
     title="Data"
     prepend-icon="mdi-database-outline"
     height="100%"
+    append-icon="mdi-open-in-new"
+    href="/emissions"
+    rel="noopener"
+    subtitle="Checkout the dataset for emissions"
   >
     <v-card-text>
       <p>
-        Total: {{ selectedEmissions.length.toLocaleString() }}
+        Raw: {{ rawSelectedEmissionTypeEmissions.length.toLocaleString() }}
+      </p>
+
+      <p>
+        Pre-Filtered: {{ `${validSelectedEmissionTypeEmissions.length.toLocaleString()}` }}  <span class="text-medium-emphasis">*</span>
       </p>
       <p>
-        Selected: {{ displayedEmissions.length.toLocaleString() }}
+        Selected: {{ filteredSelectedEmissionTypeEmissions.length.toLocaleString() }}
       </p>
-      <RouterLink to="/emissions">
-        View Dataset
-      </RouterLink>
+
+      <p class="text-medium-emphasis">
+        <small>
+          * After filtering out invalid country ISO codes
+
+        </small>
+      </p>
     </v-card-text>
   </v-card>
 </template>
