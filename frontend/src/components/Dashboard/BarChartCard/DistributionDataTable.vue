@@ -9,7 +9,7 @@ interface DataTableItem {
   deviation: number
 }
 
-const { benfordsDistribution, loading } = storeToRefs(useCountryEmissionStore())
+const { benfordsDistribution } = storeToRefs(useCountryEmissionStore())
 
 const headers = [
   { title: 'Value', value: 'value', sortable: true, width: '25%' },
@@ -44,7 +44,6 @@ function deviationColor(item: DataTableItem) {
   <v-data-table
     :headers
     :items
-    :loading
   >
     <template #[`item.expected`]="{ item }">
       <p>{{ `${item.expected}%` }}</p>

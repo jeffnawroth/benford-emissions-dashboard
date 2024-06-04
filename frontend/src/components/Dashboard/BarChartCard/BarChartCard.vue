@@ -7,7 +7,7 @@ import { useCountryEmissionStore } from '@/stores/countryEmission'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, Colors)
 
-const { loading, displayedEmissions, selectedEmissionType } = storeToRefs(useCountryEmissionStore())
+const { displayedEmissions, selectedEmissionType } = storeToRefs(useCountryEmissionStore())
 
 const text = ref('chart')
 
@@ -36,7 +36,6 @@ const dataSourceCitation = computed(() => selectedEmissionType.value === 'CO₂'
 <template>
   <v-card
     title="Emissions Analysis According to Benford’s Law"
-    :loading
     prepend-icon="mdi-calculator-variant-outline"
   >
     <v-card-subtitle>

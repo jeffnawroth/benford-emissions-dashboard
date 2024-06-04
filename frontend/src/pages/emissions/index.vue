@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 import { useCountryEmissionStore } from '@/stores/countryEmission'
 
 const countryEmissionStore = useCountryEmissionStore()
-const { co2EmissionsData, ghgEmissionsData, loading } = storeToRefs(countryEmissionStore)
+const { co2EmissionsData, ghgEmissionsData } = storeToRefs(countryEmissionStore)
 
 const co2EmissionsDataSearch = ref('')
 const ghgEmissionsDataSearch = ref('')
@@ -30,7 +30,6 @@ const ghgEmissionsDataHeaders = [
     :headers="co2EmissionsDataHeaders"
     :items="co2EmissionsData"
     :search="co2EmissionsDataSearch"
-    :loading
   >
     <template #top>
       <v-toolbar flat>
@@ -49,7 +48,6 @@ const ghgEmissionsDataHeaders = [
     :headers="ghgEmissionsDataHeaders"
     :items="ghgEmissionsData"
     :search="ghgEmissionsDataSearch"
-    :loading
   >
     <template #top>
       <v-toolbar flat>

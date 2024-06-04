@@ -2,14 +2,13 @@
 import { storeToRefs } from 'pinia'
 import { useCountryEmissionStore } from '@/stores/countryEmission'
 
-const { loading, selectedEmissions, displayedEmissions } = storeToRefs(useCountryEmissionStore())
+const { selectedEmissions, displayedEmissions } = storeToRefs(useCountryEmissionStore())
 </script>
 
 <template>
   <v-card
     title="Data"
     prepend-icon="mdi-database-outline"
-    :loading
     height="100%"
   >
     <v-card-text>

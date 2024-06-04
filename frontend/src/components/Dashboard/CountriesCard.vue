@@ -61,7 +61,6 @@ function selectAllCountries() {
 
 <template>
   <v-card
-    :loading
     title="Countries"
     prepend-icon="mdi-earth"
   >

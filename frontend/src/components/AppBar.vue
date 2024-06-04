@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { useTheme } from 'vuetify'
+import { storeToRefs } from 'pinia'
+import { useCountryEmissionStore } from '@/stores/countryEmission'
+
+const { loading } = storeToRefs(useCountryEmissionStore())
 
 const theme = useTheme()
 
@@ -22,12 +26,20 @@ onMounted(() => {
   <v-app-bar
     app
   >
+    <v-progress-linear
+      :active="loading"
+      :indeterminate="loading"
+      absolute
+      bottom
+    />
+
     <v-app-bar-title
       class="cursor-pointer"
       @click="$router.push('/')"
     >
       Benford Emissions Dashboard
     </v-app-bar-title>
+
     <v-btn
       icon="mdi-theme-light-dark"
       @click="toggleTheme"
