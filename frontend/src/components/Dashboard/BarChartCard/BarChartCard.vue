@@ -7,7 +7,7 @@ import { useCountryEmissionStore } from '@/stores/countryEmission'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, Colors)
 
-const { displayedEmissions, selectedEmissionType } = storeToRefs(useCountryEmissionStore())
+const { filteredSelectedEmissionTypeEmissions, selectedEmissionType } = storeToRefs(useCountryEmissionStore())
 
 const text = ref('chart')
 
@@ -20,7 +20,7 @@ const options = {
   },
 }
 
-const result = computed(() => benfordsLawDistribution(displayedEmissions.value))
+const result = computed(() => benfordsLawDistribution(filteredSelectedEmissionTypeEmissions.value))
 
 const data = computed(() => ({
   labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],

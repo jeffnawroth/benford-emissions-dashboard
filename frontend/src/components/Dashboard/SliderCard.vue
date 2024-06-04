@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { useCountryEmissionStore } from '@/stores/countryEmission'
 
-const { slider, selectedEmissionType } = storeToRefs(useCountryEmissionStore())
+const { selectedYear, selectedEmissionType } = storeToRefs(useCountryEmissionStore())
 
 const max = 2022
 const min = computed(() => selectedEmissionType.value === 'CO₂' ? 1750 : 1850)
@@ -12,7 +12,7 @@ const min = computed(() => selectedEmissionType.value === 'CO₂' ? 1750 : 1850)
   <v-card>
     <v-card-text>
       <v-slider
-        v-model="slider"
+        v-model="selectedYear"
         class="mt-4"
         :min
         :max

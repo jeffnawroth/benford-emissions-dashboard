@@ -9,7 +9,7 @@ interface DataTableItem {
   deviation: number
 }
 
-const { benfordsDistribution } = storeToRefs(useCountryEmissionStore())
+const { benfordsDistributionData } = storeToRefs(useCountryEmissionStore())
 
 const headers = [
   { title: 'Value', value: 'value', sortable: true, width: '25%' },
@@ -19,11 +19,11 @@ const headers = [
 ]
 
 const items = computed<DataTableItem[]>(() => {
-  return benfordsDistribution.value.expected.map((expectedValue, index) => ({
+  return benfordsDistributionData.value.expected.map((expectedValue, index) => ({
     value: index + 1,
     expected: roundNumber(expectedValue),
-    observed: roundNumber(benfordsDistribution.value.observed[index]),
-    deviation: roundNumber(Math.abs(expectedValue - benfordsDistribution.value.observed[index])),
+    observed: roundNumber(benfordsDistributionData.value.observed[index]),
+    deviation: roundNumber(Math.abs(expectedValue - benfordsDistributionData.value.observed[index])),
   }))
 })
 

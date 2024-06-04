@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 import { useCountryEmissionStore } from '@/stores/countryEmission'
 
 const countryEmissionStore = useCountryEmissionStore()
-const { co2EmissionsData, ghgEmissionsData } = storeToRefs(countryEmissionStore)
+const { rawCo2EmissionsData, rawGhgEmissionsData } = storeToRefs(countryEmissionStore)
 
 const co2EmissionsDataSearch = ref('')
 const ghgEmissionsDataSearch = ref('')
@@ -28,7 +28,7 @@ const ghgEmissionsDataHeaders = [
 <template>
   <v-data-table
     :headers="co2EmissionsDataHeaders"
-    :items="co2EmissionsData"
+    :items="rawCo2EmissionsData"
     :search="co2EmissionsDataSearch"
   >
     <template #top>
@@ -46,7 +46,7 @@ const ghgEmissionsDataHeaders = [
 
   <v-data-table
     :headers="ghgEmissionsDataHeaders"
-    :items="ghgEmissionsData"
+    :items="rawGhgEmissionsData"
     :search="ghgEmissionsDataSearch"
   >
     <template #top>
