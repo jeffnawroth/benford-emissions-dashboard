@@ -11,10 +11,11 @@ const { validSelectedEmissionTypeEmissions, filteredSelectedEmissionTypeEmission
     prepend-icon="mdi-database-outline"
     height="100%"
     append-icon="mdi-open-in-new"
-    href="/emissions"
-    rel="noopener"
-    subtitle="Checkout the dataset for emissions"
+    @click="$router.push('/emissions')"
   >
+    <v-card-subtitle class="subtitle">
+      Checkout the dataset for emissions
+    </v-card-subtitle>
     <v-card-text>
       <p>
         Raw: {{ rawSelectedEmissionTypeEmissions.length.toLocaleString() }}

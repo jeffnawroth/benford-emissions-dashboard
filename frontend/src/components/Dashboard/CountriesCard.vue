@@ -63,8 +63,10 @@ function selectAllCountries() {
   <v-card
     title="Countries"
     prepend-icon="mdi-earth"
-    subtitle="Select countries to include emissions"
   >
+    <v-card-subtitle class="subtitle">
+      Select countries to include emissions
+    </v-card-subtitle>
     <v-card-text>
       <p class="font-weight-bold mb-4">
         Selected: {{ selectedCountries.size.toLocaleString() }}
