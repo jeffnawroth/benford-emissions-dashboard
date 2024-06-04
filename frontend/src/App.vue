@@ -21,3 +21,11 @@ onMounted(() => {
     </v-main>
   </v-app>
 </template>
+
+<style>
+.v-card-subtitle {
+  white-space: wrap !important;
+  overflow: visible;
+  text-overflow: initial;
+}
+</style>

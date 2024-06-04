@@ -11,6 +11,7 @@ const title = computed(() => selectedEmissionType.value === 'CO₂' ? 'Annual CO
   <v-card
     :title
     prepend-icon="mdi-factory"
+    height="100%"
   >
     <v-card-subtitle class="subtitle">
       <Subtitle />
@@ -24,11 +25,3 @@ const title = computed(() => selectedEmissionType.value === 'CO₂' ? 'Annual CO
     </v-card-text>
   </v-card>
 </template>
-
-<style scoped>
-.subtitle {
-  white-space: normal;
-  overflow: visible;
-  text-overflow: initial;
-}
-</style>
