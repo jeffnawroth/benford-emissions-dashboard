@@ -8,6 +8,8 @@ const { rawCo2EmissionsData, rawGhgEmissionsData } = storeToRefs(countryEmission
 const co2EmissionsDataSearch = ref('')
 const ghgEmissionsDataSearch = ref('')
 
+const searchPlaceholder = 'Search...'
+
 const headers = [
   { title: 'Country', value: 'country', sortable: true, width: '25%' },
   { title: 'Year', value: 'year', sortable: true, width: '25%' },
@@ -26,39 +28,45 @@ const ghgEmissionsDataHeaders = [
 </script>
 
 <template>
-  <v-data-table
-    :headers="co2EmissionsDataHeaders"
-    :items="rawCo2EmissionsData"
-    :search="co2EmissionsDataSearch"
-  >
-    <template #top>
-      <v-toolbar flat>
-        <v-toolbar-title>CO2 Emissions Data</v-toolbar-title>
-        <v-text-field
-          v-model="co2EmissionsDataSearch"
-          placeholder="Search..."
-          clearable
-          hide-details
-        />
-      </v-toolbar>
-    </template>
-  </v-data-table>
+  <v-row>
+    <v-col cols="12">
+      <v-data-table
+        :headers="co2EmissionsDataHeaders"
+        :items="rawCo2EmissionsData"
+        :search="co2EmissionsDataSearch"
+      >
+        <template #top>
+          <v-toolbar flat>
+            <v-toolbar-title>Co2 Emissions Data</v-toolbar-title>
 
-  <v-data-table
-    :headers="ghgEmissionsDataHeaders"
-    :items="rawGhgEmissionsData"
-    :search="ghgEmissionsDataSearch"
-  >
-    <template #top>
-      <v-toolbar flat>
-        <v-toolbar-title>GHG Emissions Data</v-toolbar-title>
-        <v-text-field
-          v-model="ghgEmissionsDataSearch"
-          placeholder="Search..."
-          clearable
-          hide-details
-        />
-      </v-toolbar>
-    </template>
-  </v-data-table>
+            <v-text-field
+              v-model="co2EmissionsDataSearch"
+              :placeholder="searchPlaceholder"
+              clearable
+              hide-details
+            />
+          </v-toolbar>
+        </template>
+      </v-data-table>
+    </v-col>
+    <v-col cols="12">
+      <v-data-table
+        :headers="ghgEmissionsDataHeaders"
+        :items="rawGhgEmissionsData"
+        :search="ghgEmissionsDataSearch"
+      >
+        <template #top>
+          <v-toolbar flat>
+            <v-toolbar-title>Ghg Emissions Data</v-toolbar-title>
+            <v-text-field
+              v-model="ghgEmissionsDataSearch"
+              :placeholder="searchPlaceholder"
+              clearable
+              hide-details
+            />
+          </v-toolbar>
+        </template>
+      </v-data-table>
+    </v-col>
+  </v-row>
 </template>
