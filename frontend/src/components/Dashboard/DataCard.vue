@@ -23,7 +23,7 @@ const { validSelectedEmissionTypeEmissions, filteredSelectedEmissionTypeEmission
       <p>
         Pre-Filtered: {{ `${validSelectedEmissionTypeEmissions.length.toLocaleString()}` }}  <span class="text-medium-emphasis">*</span>
       </p>
-      <p>
+      <p class="font-weight-bold">
         Selected: {{ filteredSelectedEmissionTypeEmissions.length.toLocaleString() }}
       </p>
 

@@ -63,12 +63,12 @@ function selectAllCountries() {
   <v-card
     title="Countries"
     prepend-icon="mdi-earth"
+    subtitle="Select countries to include emissions"
   >
     <v-card-text>
-      <div class="mb-2">
-        <p>Total: {{ countries.length.toLocaleString() }}</p>
-        <p>Selected: {{ selectedCountries.size.toLocaleString() }}</p>
-      </div>
+      <p class="font-weight-bold mb-4">
+        Selected: {{ selectedCountries.size.toLocaleString() }}
+      </p>
 
       <v-text-field
         v-model="countrySearch"
@@ -97,17 +97,23 @@ function selectAllCountries() {
         class="overflow-y-auto"
         max-height="30vh"
       >
-        <v-list-item
-          v-for="country in filteredCountries"
-          :key="country"
-          :title="country"
-          @click="toggleCountrySelection(country)"
-        >
-          <template #prepend>
-            <v-list-item-action start>
-              <v-checkbox-btn :model-value="selectedCountries.has(country)" />
-            </v-list-item-action>
-          </template>
+        <template v-if="filteredCountries.length > 0">
+          <v-list-item
+            v-for="country in filteredCountries"
+            :key="country"
+            :title="country"
+            @click="toggleCountrySelection(country)"
+          >
+            <template #prepend>
+              <v-list-item-action start>
+                <v-checkbox-btn :model-value="selectedCountries.has(country)" />
+              </v-list-item-action>
+            </template>
+          </v-list-item>
+        </template>
+
+        <v-list-item v-else>
+          <v-empty-state text="No data available" />
         </v-list-item>
 
         <template
