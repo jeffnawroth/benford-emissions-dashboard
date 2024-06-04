@@ -2,8 +2,8 @@ services:
   frontend:
     build:
       context: ./frontend
-    ports:
-      - "80:80"
+    networks:
+      - webnet
 
   backend:
     build:
@@ -14,25 +14,34 @@ services:
       - DB_CONNECTION_STRING=mongodb://mongo:27017/emissions
     depends_on:
       - mongo
+    networks:
+      - webnet
 
   mongo:
     image: mongo:latest
     ports:
       - "27017:27017"
+    networks:
+      - webnet
 
-#   caddy:
-#     image: caddy:latest
-#     restart: unless-stopped
-#     ports:
-#       - "80:80"
-#       - "443:443"
-#       - "443:443/udp"
-#     volumes:
-#       - $PWD/Caddyfile:/etc/caddy/Caddyfile
-#       - $PWD/site:/srv
-#       - caddy_data:/data
-#       - caddy_config:/config
+  caddy:
+    image: caddy:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - webnet
 
-# volumes:
-#   caddy_data:
-#   caddy_config:
+networks:
+  webnet:
+
+volumes:
+  caddy_data:
+  caddy_config:

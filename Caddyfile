@@ -1,0 +1,9 @@
+http://jeffnawroth.me {
+    redir https://jeffnawroth.me{uri}
+}
+
+jeffnawroth.me {
+    reverse_proxy /co2_emissions backend:8080
+    reverse_proxy /ghg_emissions backend:8080
+    reverse_proxy /* frontend:80
+}
