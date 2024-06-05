@@ -44,5 +44,10 @@ onMounted(() => {
       icon="mdi-theme-light-dark"
       @click="toggleTheme"
     />
+    <v-btn
+      icon="mdi-github"
+      href="https://github.com/jeffnawroth/benford-emissions-dashboard"
+      target="_blank"
+    />
   </v-app-bar>
 </template>
