@@ -4,6 +4,7 @@ services:
       context: ./frontend
     networks:
       - webnet
+    restart: always
 
   backend:
     build:
@@ -16,6 +17,7 @@ services:
       - mongo
     networks:
       - webnet
+    restart: always
 
   mongo:
     image: mongo:latest
@@ -23,6 +25,8 @@ services:
       - "27017:27017"
     networks:
       - webnet
+    restart: always
+
 
   caddy:
     image: caddy:latest
@@ -38,6 +42,7 @@ services:
       - backend
     networks:
       - webnet
+    restart: always
 
 networks:
   webnet:
