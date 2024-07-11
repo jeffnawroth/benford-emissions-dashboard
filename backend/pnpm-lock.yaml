@@ -18,14 +18,14 @@ importers:
         specifier: ^4.19.2
         version: 4.19.2
       mongoose:
-        specifier: ^8.5.0
+        specifier: ^8.4.1
         version: 8.5.0
     devDependencies:
       '@antfu/eslint-config':
-        specifier: ^2.22.0
+        specifier: ^2.19.2
         version: 2.22.0(@vue/compiler-sfc@3.4.31)(eslint@9.6.0)(typescript@5.5.3)
       eslint:
-        specifier: ^9.6.0
+        specifier: ^9.4.0
         version: 9.6.0
 
 packages:
