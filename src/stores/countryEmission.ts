@@ -38,6 +38,12 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
     return benfordsLawDistribution(filteredData.value.values)
   })
 
+  // Get the unique years of the filtered data
+  const uniqueYears = computed(() => [...new Set(filteredData.value.years)])
+
+  // Sort the unique years
+  const sortedYears = computed(() => [...uniqueYears.value].sort((a, b) => a - b))
+
   // Methods
 
   // Fetch emissions data from the API
@@ -62,6 +68,10 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
 
       // Beide JSON-Antworten verarbeiten
       [metadata.value, data.value] = await Promise.all([metadataResponse.json(), dataResponse.json()])
+
+      // Setze die Standardwerte für die Auswahl
+      selectedCountriesIds.value.add(metadata.value.dimensions.entities.values[0].id)
+      selectedYear.value = data.value.years[data.value.years.length - 1]
     }
     catch (error) {
       console.error('Error fetching data or metadata:', error)
@@ -71,5 +81,5 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
     }
   }
 
-  return { fetchData, loading, selectedCountriesIds, selectedYear, benfordsDistributionData, metadata, data, filteredData, selectedEmissionType }
+  return { fetchData, loading, selectedCountriesIds, selectedYear, benfordsDistributionData, metadata, data, filteredData, selectedEmissionType, sortedYears }
 })

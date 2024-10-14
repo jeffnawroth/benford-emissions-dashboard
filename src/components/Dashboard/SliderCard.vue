@@ -2,13 +2,10 @@
 import { useCountryEmissionStore } from '@/stores/countryEmission'
 import { storeToRefs } from 'pinia'
 
-const { selectedYear, filteredData } = storeToRefs(useCountryEmissionStore())
+const { selectedYear, sortedYears } = storeToRefs(useCountryEmissionStore())
 
-const uniqueYears = computed(() => [...new Set(filteredData.value.years)])
-const sortedYears = computed(() => [...uniqueYears.value].sort((a, b) => a - b))
-
-const max = computed(() => sortedYears.value[sortedYears.value.length - 1])
-const min = computed(() => sortedYears.value[0])
+const max = computed(() => sortedYears.value[sortedYears.value.length - 1] || 0)
+const min = computed(() => sortedYears.value[0] || 0)
 </script>
 
 <template>
