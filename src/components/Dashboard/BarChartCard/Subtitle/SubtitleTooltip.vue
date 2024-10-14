@@ -18,7 +18,7 @@ const splittedText = text.split(/(?<=\.)\s+/)
   >
     <template #activator="{ props }">
       <span
-        class="text-decoration-underline"
+        class="text-decoration-underline cursor-help"
         v-bind="props"
       >
 
