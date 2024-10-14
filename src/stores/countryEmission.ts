@@ -19,10 +19,13 @@ export const useCountryEmissionStore = defineStore('countryEmission', () => {
 
     return data.value.entities.reduce<Data>((acc, entity, index) => {
       if (selectedCountriesIds.value.has(entity) && data.value.values[index] !== 0) {
-        acc.entities.push(entity)
-        acc.values.push(data.value.values[index])
+        if (data.value.years[index] <= selectedYear.value) {
+          acc.entities.push(entity)
+          acc.values.push(data.value.values[index])
+        }
         acc.years.push(data.value.years[index])
       }
+
       return acc
     }, { entities: [], values: [], years: [] })
   })

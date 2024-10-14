@@ -4,8 +4,11 @@ import { storeToRefs } from 'pinia'
 
 const { selectedYear, filteredData } = storeToRefs(useCountryEmissionStore())
 
-const max = computed(() => filteredData.value.years[filteredData.value.years.length - 1])
-const min = computed(() => filteredData.value.years[0])
+const uniqueYears = computed(() => [...new Set(filteredData.value.years)])
+const sortedYears = computed(() => [...uniqueYears.value].sort((a, b) => a - b))
+
+const max = computed(() => sortedYears.value[sortedYears.value.length - 1])
+const min = computed(() => sortedYears.value[0])
 </script>
 
 <template>
