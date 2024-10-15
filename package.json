@@ -1,7 +1,7 @@
 {
   "name": "benford-emissions-dashboard",
   "type": "module",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
