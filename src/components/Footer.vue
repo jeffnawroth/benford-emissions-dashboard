@@ -11,7 +11,7 @@
         class="text-center"
         cols="12"
       >
-        {{ new Date().getFullYear() }} — <strong>Benford Emissions Dashboard</strong>
+        {{ new Date().getFullYear() }} — <strong>Jeff Nawroth</strong>
       </v-col>
     </v-row>
   </v-footer>
