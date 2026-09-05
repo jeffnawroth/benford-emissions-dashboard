@@ -7,6 +7,7 @@ import { CountryPicker } from '@/components/dashboard/country-picker'
 import { DatasetUpload } from '@/components/dashboard/dataset-upload'
 import { DistributionView } from '@/components/dashboard/distribution-view'
 import { EmissionTypeToggle } from '@/components/dashboard/emission-type-toggle'
+import { ExportButtons } from '@/components/dashboard/export-buttons'
 import { InfoTerm } from '@/components/dashboard/info-term'
 import { TestTypeToggle } from '@/components/dashboard/test-type-toggle'
 import { YearSlider } from '@/components/dashboard/year-slider'
@@ -17,7 +18,15 @@ import { useDashboardStore } from '@/store/dashboard-store'
 export default function HomePage() {
   const dataSource = useDashboardStore(state => state.dataSource)
   const setDataSource = useDashboardStore(state => state.setDataSource)
+  const emissionKind = useDashboardStore(state => state.emissionKind)
+  const uploadedDataset = useDashboardStore(state => state.uploadedDataset)
   const { emissionsQuery, dataset, analysis } = useBenfordAnalysis()
+
+  const exportSource = dataSource === 'upload' && uploadedDataset
+    ? `Uploaded: ${uploadedDataset.fileName} (column: ${uploadedDataset.columnName})`
+    : dataset
+      ? `${dataset.name} (${emissionKind.toUpperCase()}), Our World in Data`
+      : 'Unknown source'
 
   return (
     <main className="mx-auto max-w-3xl space-y-6 px-4 py-10">
@@ -89,6 +98,9 @@ export default function HomePage() {
       <section className="space-y-4">
         {analysis.status === 'ok' && (
           <div className="rounded-md border border-border bg-card p-4">
+            <div className="mb-3 flex justify-end">
+              <ExportButtons analysis={analysis} source={exportSource} />
+            </div>
             <DistributionView analysis={analysis} />
           </div>
         )}
