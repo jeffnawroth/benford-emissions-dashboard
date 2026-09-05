@@ -2,9 +2,16 @@
 node_modules
 /dist
 
+# build outputs
+apps/web/.next
+apps/web/out
+apps/worker/.wrangler
+*.tsbuildinfo
+
 # local env files
 .env.local
 .env.*.local
+.dev.vars
 
 # Log files
 npm-debug.log*

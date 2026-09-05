@@ -26,12 +26,13 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      - name: Build
-        run: pnpm run build
+      - name: Build web app (static export)
+        run: pnpm --filter @benford/web run build
 
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy Worker (static assets + API)
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=bed-jeffnawroth-me
+          workingDirectory: apps/worker
+          command: deploy

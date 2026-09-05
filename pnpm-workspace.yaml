@@ -1,8 +1,28 @@
+minimumReleaseAgeExcludePrune: true
+minimumReleaseAgeExclude:
+  - '@cloudflare/workers-types@5.20260905.1'
+  - '@eslint-react/ast@5.18.8'
+  - '@eslint-react/core@5.18.8'
+  - '@eslint-react/eslint-plugin@5.18.8'
+  - '@eslint-react/eslint@5.18.8'
+  - '@eslint-react/jsx@5.18.8'
+  - '@eslint-react/shared@5.18.8'
+  - '@eslint-react/var@5.18.8'
+  - eslint-plugin-react-dom@5.18.8
+  - eslint-plugin-react-jsx@5.18.8
+  - eslint-plugin-react-naming-convention@5.18.8
+  - eslint-plugin-react-rsc@5.18.8
+  - eslint-plugin-react-web-api@5.18.8
+  - eslint-plugin-react-x@5.18.8
+
+trustPolicy: no-downgrade
+shellEmulator: true
+
 packages:
-  - .
+  - apps/*
+  - packages/*
 
 allowBuilds:
-  core-js: true
   esbuild: true
-  vue-demi: true
+  sharp: true
   workerd: true
