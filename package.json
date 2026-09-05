@@ -2,7 +2,7 @@
   "name": "benford-emissions-dashboard",
   "type": "module",
   "version": "1.0.0",
-  "packageManager": "pnpm@9.14.4",
+  "packageManager": "pnpm@11.25.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
