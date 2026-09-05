@@ -9,8 +9,20 @@ export interface Env {
 // instead of the old app's behaviour of hitting the public API on every page load.
 const CACHE_TTL_SECONDS = 60 * 60 * 24
 
+// Public, read-only, no-credentials data — `*` (not a reflected request
+// origin) is the right call here, since a per-origin header would corrupt
+// entries in the shared `caches.default` store across different callers.
+const CORS_HEADERS = { 'Access-Control-Allow-Origin': '*' }
+
 function isEmissionKind(value: string): value is EmissionKind {
   return value === 'co2' || value === 'ghg'
+}
+
+function jsonWithCors(data: unknown, init?: ResponseInit): Response {
+  return Response.json(data, {
+    ...init,
+    headers: { ...CORS_HEADERS, ...init?.headers },
+  })
 }
 
 async function fetchIndicator(id: number) {
@@ -32,7 +44,7 @@ async function fetchIndicator(id: number) {
 
 async function handleEmissionsRequest(request: Request, kind: string, ctx: ExecutionContext): Promise<Response> {
   if (!isEmissionKind(kind))
-    return Response.json({ error: `Unknown emission type "${kind}"` }, { status: 404 })
+    return jsonWithCors({ error: `Unknown emission type "${kind}"` }, { status: 404 })
 
   const cache = caches.default
   const cacheKey = new Request(new URL(request.url).toString(), request)
@@ -42,14 +54,14 @@ async function handleEmissionsRequest(request: Request, kind: string, ctx: Execu
 
   try {
     const dataset = await fetchIndicator(INDICATOR_IDS[kind])
-    const response = Response.json(dataset, {
+    const response = jsonWithCors(dataset, {
       headers: { 'Cache-Control': `public, max-age=${CACHE_TTL_SECONDS}` },
     })
     ctx.waitUntil(cache.put(cacheKey, response.clone()))
     return response
   }
   catch {
-    return Response.json({ error: 'Failed to fetch emissions data from Our World in Data' }, { status: 502 })
+    return jsonWithCors({ error: 'Failed to fetch emissions data from Our World in Data' }, { status: 502 })
   }
 }
 

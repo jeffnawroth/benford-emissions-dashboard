@@ -5,7 +5,7 @@ export default antfu({
   react: true,
   nextjs: true,
   typescript: true,
-  ignores: ['**/.next/**', '**/dist/**', '**/.wrangler/**', '**/worker-configuration.d.ts'],
+  ignores: ['**/.next/**', '**/dist/**', '**/.wrangler/**', '**/worker-configuration.d.ts', '**/next-env.d.ts'],
 }, {
   rules: {
     // Next.js App Router requires exporting `metadata` alongside the default
