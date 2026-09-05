@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { ThemeToggle } from '@/components/theme-toggle'
 import { Providers } from './providers'
 import './globals.css'
 
@@ -11,7 +12,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className="min-h-screen antialiased">
-        <Providers>{children}</Providers>
+        <Providers>
+          <ThemeToggle />
+          {children}
+        </Providers>
       </body>
     </html>
   )
