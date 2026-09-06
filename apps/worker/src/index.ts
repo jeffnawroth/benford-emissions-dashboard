@@ -1,5 +1,6 @@
 import type { EmissionKind, OwidData, OwidMetadata } from './normalize'
 import { INDICATOR_IDS, normalizeOwidResponse } from './normalize'
+import { redirectToCanonicalHost } from './redirect'
 
 export interface Env {
   ASSETS: Fetcher
@@ -68,6 +69,11 @@ async function handleEmissionsRequest(request: Request, kind: string, ctx: Execu
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url)
+
+    const redirect = redirectToCanonicalHost(url)
+    if (redirect)
+      return redirect
+
     const emissionsMatch = url.pathname.match(/^\/api\/emissions\/([^/]+)$/)
 
     if (emissionsMatch)
