@@ -2,6 +2,15 @@ name = "bed-jeffnawroth-me"
 main = "src/index.ts"
 compatibility_date = "2026-09-05"
 
+# Cloudflare Custom Domain (not the legacy zone `routes` mechanism): this
+# auto-provisions DNS + a managed TLS cert for the Worker. Requires
+# bed.jeffnawroth.me to first be removed as a Custom Domain from the old
+# Cloudflare Pages project — Cloudflare rejects a Custom Domain on a hostname
+# that already has a CNAME/Custom Domain record elsewhere.
+[[routes]]
+pattern = "bed.jeffnawroth.me"
+custom_domain = true
+
 [assets]
 directory = "../web/out"
 binding = "ASSETS"
