@@ -1,8 +1,8 @@
 'use client'
 
 import type { EmissionKind } from '@/lib/types'
-import * as ToggleGroup from '@radix-ui/react-toggle-group'
 import { InfoTerm } from '@/components/dashboard/info-term'
+import { SegmentedControl } from '@/components/ui/segmented-control'
 import { useEmissionsDataset } from '@/hooks/use-emissions-dataset'
 import { CO2_EQUIVALENTS_EXPLANATION, FOSSIL_EMISSIONS_EXPLANATION, GREENHOUSE_GAS_EXPLANATION } from '@/lib/education-copy'
 import { useDashboardStore } from '@/store/dashboard-store'
@@ -14,30 +14,18 @@ export function EmissionTypeToggle() {
 
   return (
     <div>
-      {dataset && <h2 className="text-lg font-semibold">{dataset.name}</h2>}
+      {dataset && <h2 className="text-base font-semibold">{dataset.name}</h2>}
 
-      <ToggleGroup.Root
-        type="single"
+      <SegmentedControl<EmissionKind>
         value={emissionKind}
-        onValueChange={(value) => {
-          if (value)
-            setEmissionKind(value as EmissionKind)
-        }}
-        className="mt-2 inline-flex overflow-hidden rounded-md border border-border"
-      >
-        <ToggleGroup.Item
-          value="co2"
-          className="px-3 py-1.5 text-sm data-[state=on]:bg-accent data-[state=on]:text-accent-foreground"
-        >
-          CO₂
-        </ToggleGroup.Item>
-        <ToggleGroup.Item
-          value="ghg"
-          className="px-3 py-1.5 text-sm data-[state=on]:bg-accent data-[state=on]:text-accent-foreground"
-        >
-          GHG
-        </ToggleGroup.Item>
-      </ToggleGroup.Root>
+        onValueChange={setEmissionKind}
+        aria-label="Emission type"
+        className="mt-2"
+        options={[
+          { value: 'co2', label: 'CO₂' },
+          { value: 'ghg', label: 'GHG' },
+        ]}
+      />
 
       <p className="mt-2 text-sm text-muted-foreground">
         {emissionKind === 'co2'

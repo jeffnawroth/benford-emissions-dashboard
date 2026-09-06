@@ -1,7 +1,7 @@
 'use client'
 
 import type { BenfordTestType } from '@benford/stats'
-import * as ToggleGroup from '@radix-ui/react-toggle-group'
+import { SegmentedControl } from '@/components/ui/segmented-control'
 import { useDashboardStore } from '@/store/dashboard-store'
 
 const OPTIONS: { value: BenfordTestType, label: string }[] = [
@@ -15,24 +15,11 @@ export function TestTypeToggle() {
   const setTestType = useDashboardStore(state => state.setTestType)
 
   return (
-    <ToggleGroup.Root
-      type="single"
+    <SegmentedControl<BenfordTestType>
       value={testType}
-      onValueChange={(value) => {
-        if (value)
-          setTestType(value as BenfordTestType)
-      }}
-      className="inline-flex overflow-hidden rounded-md border border-border"
-    >
-      {OPTIONS.map(option => (
-        <ToggleGroup.Item
-          key={option.value}
-          value={option.value}
-          className="px-3 py-1.5 text-sm data-[state=on]:bg-accent data-[state=on]:text-accent-foreground"
-        >
-          {option.label}
-        </ToggleGroup.Item>
-      ))}
-    </ToggleGroup.Root>
+      onValueChange={setTestType}
+      aria-label="Digit test type"
+      options={OPTIONS}
+    />
   )
 }

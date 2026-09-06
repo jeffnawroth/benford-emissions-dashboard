@@ -27,31 +27,36 @@ export function CountryPicker({ countries }: { countries: NormalizedCountry[] })
 
   return (
     <div>
+      <label htmlFor="country-search" className="sr-only">Search countries</label>
       <input
+        id="country-search"
         type="search"
         value={search}
         onChange={e => setSearch(e.target.value)}
         placeholder="Search countries…"
-        className="w-full rounded-md border border-border bg-card px-3 py-1.5 text-sm"
+        className="w-full rounded-sm border border-border bg-surface px-3 py-1.5 text-sm"
       />
 
-      <label className="mt-2 flex items-center gap-2 border-b border-border pb-2 text-sm font-medium">
+      <label className="mt-2 flex items-center gap-2 border-b border-divider pb-2 text-sm font-medium">
         <Checkbox.Root
           checked={someSelected ? 'indeterminate' : allSelected}
           onCheckedChange={(checked) => {
             setSelectedCountryIds(checked ? countries.map(c => c.id) : [])
           }}
-          className="flex size-4 items-center justify-center rounded border border-border data-[state=checked]:bg-accent data-[state=indeterminate]:bg-accent"
+          className="flex size-4 items-center justify-center rounded-xs border border-border data-[state=checked]:bg-accent data-[state=indeterminate]:bg-accent"
         >
           <Checkbox.Indicator>
             {someSelected ? <Minus className="size-3 text-accent-foreground" /> : <Check className="size-3 text-accent-foreground" />}
           </Checkbox.Indicator>
         </Checkbox.Root>
         Select all (
-        {selectedCountryIds.size}
-        {' '}
-        /
-        {countries.length}
+        <span className="font-mono tabular-nums">
+          {selectedCountryIds.size}
+          {' '}
+          /
+          {' '}
+          {countries.length}
+        </span>
         )
       </label>
 
@@ -61,7 +66,7 @@ export function CountryPicker({ countries }: { countries: NormalizedCountry[] })
             <Checkbox.Root
               checked={selectedCountryIds.has(country.id)}
               onCheckedChange={() => toggleCountry(country.id)}
-              className="flex size-4 items-center justify-center rounded border border-border data-[state=checked]:bg-accent"
+              className="flex size-4 items-center justify-center rounded-xs border border-border data-[state=checked]:bg-accent"
             >
               <Checkbox.Indicator>
                 <Check className="size-3 text-accent-foreground" />

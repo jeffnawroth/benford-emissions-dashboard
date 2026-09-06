@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { EmissionTypeToggle } from '@/components/dashboard/emission-type-toggle'
+import { Button } from '@/components/ui/button'
 import { useEmissionsDataset } from '@/hooks/use-emissions-dataset'
 import { useDashboardStore } from '@/store/dashboard-store'
 
@@ -47,29 +48,31 @@ export default function EmissionsPage() {
 
   return (
     <main className="mx-auto max-w-3xl space-y-4 px-4 py-10">
-      <Link href="/" className="text-sm underline">
+      <Link href="/" className="text-sm text-accent underline underline-offset-2">
         ← Back to dashboard
       </Link>
 
-      <h1 className="text-2xl font-semibold">Raw data</h1>
+      <h1 className="text-2xl font-semibold tracking-tight">Raw data</h1>
       <EmissionTypeToggle />
 
-      {isLoading && <p className="text-sm text-muted-foreground">Loading…</p>}
-      {isError && <p className="text-sm text-negative">Failed to load emissions data.</p>}
+      {isLoading && <p role="status" aria-live="polite" className="text-sm text-muted-foreground">Loading…</p>}
+      {isError && <p role="status" aria-live="assertive" className="text-sm text-error">Failed to load emissions data.</p>}
 
       {dataset && (
         <>
+          <label htmlFor="emissions-search" className="sr-only">Search countries</label>
           <input
+            id="emissions-search"
             type="search"
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Search countries…"
-            className="w-full rounded-md border border-border bg-card px-3 py-1.5 text-sm"
+            className="w-full rounded-sm border border-border bg-surface px-3 py-1.5 text-sm"
           />
 
           <div className="max-h-[60vh] overflow-y-auto rounded-md border border-border">
             <table className="w-full text-sm">
-              <thead className="sticky top-0 bg-card">
+              <thead className="sticky top-0 bg-surface-elevated">
                 <tr className="border-b border-border text-left">
                   <th className="px-3 py-2 font-medium">Country</th>
                   <th className="px-3 py-2 font-medium">Year</th>
@@ -84,8 +87,8 @@ export default function EmissionsPage() {
                 {rows.map(record => (
                   <tr key={`${record.countryId}-${record.year}`} className="border-b border-border/50">
                     <td className="px-3 py-1.5">{record.countryName}</td>
-                    <td className="px-3 py-1.5">{record.year}</td>
-                    <td className="px-3 py-1.5">{record.value.toLocaleString()}</td>
+                    <td className="px-3 py-1.5 font-mono tabular-nums">{record.year}</td>
+                    <td className="px-3 py-1.5 font-mono tabular-nums">{record.value.toLocaleString()}</td>
                   </tr>
                 ))}
               </tbody>
@@ -96,25 +99,21 @@ export default function EmissionsPage() {
             <p>
               Showing
               {' '}
-              {rows.length}
+              <span className="font-numeric">{rows.length}</span>
               {' '}
               of
               {' '}
-              {matchingRows.length}
+              <span className="font-numeric">{matchingRows.length}</span>
               {' '}
               matching records (
-              {dataset.records.length}
+              <span className="font-numeric">{dataset.records.length}</span>
               {' '}
               total)
             </p>
             {visibleCount < matchingRows.length && (
-              <button
-                type="button"
-                onClick={() => setVisibleCount(count => count + PAGE_SIZE)}
-                className="rounded-md border border-border px-2 py-1 underline"
-              >
+              <Button variant="outline" size="sm" onClick={() => setVisibleCount(count => count + PAGE_SIZE)}>
                 Load more
-              </button>
+              </Button>
             )}
           </div>
         </>

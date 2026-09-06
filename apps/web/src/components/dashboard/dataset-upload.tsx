@@ -4,6 +4,7 @@ import * as Select from '@radix-ui/react-select'
 import { Check, ChevronDown } from 'lucide-react'
 import Papa from 'papaparse'
 import { useState } from 'react'
+import { Button } from '@/components/ui/button'
 import { detectNumericColumn, parseNumericColumn } from '@/lib/csv'
 import { useDashboardStore } from '@/store/dashboard-store'
 
@@ -51,18 +52,28 @@ export function DatasetUpload() {
 
   return (
     <div className="space-y-3">
-      <input
-        type="file"
-        accept=".csv"
-        onChange={(e) => {
-          const file = e.target.files?.[0]
-          if (file)
-            handleFile(file)
-        }}
-        className="block w-full text-sm"
-      />
+      <div>
+        <label htmlFor="csv-upload" className="mb-1 block text-sm font-medium">
+          Upload a CSV file
+        </label>
+        <input
+          id="csv-upload"
+          type="file"
+          accept=".csv"
+          onChange={(e) => {
+            const file = e.target.files?.[0]
+            if (file)
+              handleFile(file)
+          }}
+          className="block w-full text-sm"
+        />
+      </div>
 
-      {error && <p className="text-sm text-negative">{error}</p>}
+      {error && (
+        <p role="status" aria-live="assertive" className="text-sm text-error">
+          {error}
+        </p>
+      )}
 
       {headers.length > 0 && (
         <div className="flex items-center gap-2 text-sm">
@@ -75,12 +86,12 @@ export function DatasetUpload() {
                 applyColumn(fileName, rows, column)
             }}
           >
-            <Select.Trigger className="inline-flex items-center gap-1 rounded-md border border-border bg-card px-2 py-1">
+            <Select.Trigger className="inline-flex items-center gap-1 rounded-sm border border-border bg-surface px-2 py-1">
               <Select.Value />
               <ChevronDown className="size-3.5" />
             </Select.Trigger>
             <Select.Portal>
-              <Select.Content className="rounded-md border border-border bg-card shadow-lg">
+              <Select.Content className="rounded-lg border border-border bg-surface-elevated shadow-elevation-lg">
                 <Select.Viewport>
                   {headers.map(header => (
                     <Select.Item
@@ -105,7 +116,7 @@ export function DatasetUpload() {
         <p className="text-sm text-muted-foreground">
           Analyzing
           {' '}
-          {uploadedDataset.values.length}
+          <span className="font-mono tabular-nums">{uploadedDataset.values.length}</span>
           {' '}
           values from &ldquo;
           {uploadedDataset.columnName}
@@ -114,9 +125,9 @@ export function DatasetUpload() {
           {uploadedDataset.fileName}
           .
           {' '}
-          <button type="button" onClick={() => setDataSource('owid')} className="underline">
+          <Button variant="link" size="sm" className="h-auto p-0" onClick={() => setDataSource('owid')}>
             Switch back to Our World in Data
-          </button>
+          </Button>
         </p>
       )}
     </div>

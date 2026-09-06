@@ -21,9 +21,9 @@ export function YearSlider({ years }: { years: number[] }) {
         <span className="font-medium">
           Year cutoff:
           {' '}
-          {value}
+          <span className="font-mono tabular-nums">{value}</span>
         </span>
-        <span className="text-muted-foreground">
+        <span className="font-mono tabular-nums text-muted-foreground">
           {min}
           {' '}
           –
@@ -32,7 +32,7 @@ export function YearSlider({ years }: { years: number[] }) {
         </span>
       </div>
       <Slider.Root
-        className="relative flex h-5 w-full touch-none items-center"
+        className="relative mt-2 flex h-5 w-full touch-none items-center"
         min={min}
         max={max}
         step={1}
@@ -45,12 +45,12 @@ export function YearSlider({ years }: { years: number[] }) {
         <Slider.Track className="relative h-1 grow rounded-full bg-border">
           <Slider.Range className="absolute h-full rounded-full bg-accent" />
         </Slider.Track>
-        <Slider.Thumb className="block size-4 rounded-full bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label="Year cutoff" />
+        <Slider.Thumb className="block size-4 rounded-full bg-accent shadow-elevation-sm focus:outline-none" aria-label="Year cutoff" />
       </Slider.Root>
       <p className="mt-1 text-xs text-muted-foreground">
         Includes all data through
         {' '}
-        {value}
+        <span className="font-mono tabular-nums">{value}</span>
         .
       </p>
     </div>
