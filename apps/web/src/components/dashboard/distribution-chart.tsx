@@ -3,12 +3,14 @@
 import type { BenfordAnalysisOk } from '@benford/stats'
 import type { ChartData, ChartOptions } from 'chart.js'
 import {
+  BarController,
   BarElement,
   CategoryScale,
   Chart as ChartJS,
   Tooltip as ChartTooltip,
   Legend,
   LinearScale,
+  LineController,
   LineElement,
   PointElement,
   Title,
@@ -19,7 +21,7 @@ import { useChartTheme } from '@/hooks/use-chart-theme'
 import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion'
 import { digitLabels } from '@/lib/digit-labels'
 
-ChartJS.register(Title, ChartTooltip, Legend, BarElement, LineElement, PointElement, CategoryScale, LinearScale)
+ChartJS.register(Title, ChartTooltip, Legend, BarController, BarElement, LineController, LineElement, PointElement, CategoryScale, LinearScale)
 
 export function DistributionChart({ analysis }: { analysis: BenfordAnalysisOk }) {
   const { resolvedTheme } = useTheme()
