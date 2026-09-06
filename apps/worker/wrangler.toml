@@ -2,11 +2,29 @@ name = "bed-jeffnawroth-me"
 main = "src/index.ts"
 compatibility_date = "2026-09-05"
 
+# Cloudflare Custom Domains (not the legacy zone `routes` mechanism): these
+# auto-provision DNS + a managed TLS cert for the Worker. Both hostnames must
+# first be removed as Custom Domains from the old Cloudflare Pages project —
+# Cloudflare rejects a Custom Domain on a hostname that already has a
+# CNAME/Custom Domain record elsewhere. bed.jeffnawroth.me is canonical;
+# www.bed.jeffnawroth.me is bound here too only so the Worker's fetch handler
+# can 301-redirect it (see src/index.ts) instead of 404ing.
+[[routes]]
+pattern = "bed.jeffnawroth.me"
+custom_domain = true
+
+[[routes]]
+pattern = "www.bed.jeffnawroth.me"
+custom_domain = true
+
 [assets]
 directory = "../web/out"
 binding = "ASSETS"
 not_found_handling = "404-page"
-run_worker_first = [ "/api/*" ]
+# `true`, not `["/api/*"]`: the www→bare-domain redirect (src/index.ts) must
+# run for every path, not just /api/*, so the Worker script has to see every
+# request rather than letting non-API paths bypass it straight to assets.
+run_worker_first = true
 
 [observability]
 enabled = true

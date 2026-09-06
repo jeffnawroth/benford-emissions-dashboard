@@ -3,12 +3,11 @@
 
 # Benford Emissions Dashboard
 
-Visualize and analyze CO2 and GHG emissions across countries using Benford's Law to identify anomalies and gain insights into global emission trends.
-
+Apply [Benford's Law](https://en.wikipedia.org/wiki/Benford%27s_law) digit-conformity analysis to CO2/GHG emissions data from [Our World in Data](https://ourworldindata.org/), or to your own uploaded CSV, to spot anomalies in reported figures.
 
 ## Demo
 
-You can visit a demo of the [Benford Emissions Dashboard](https://www.bed.jeffnawroth.me) here
+You can visit a demo of the [Benford Emissions Dashboard](https://bed.jeffnawroth.me) here
 
 <!-- Insert GIF of Demo here -->
 
@@ -32,16 +31,21 @@ Install dependencies
   pnpm install
 ```
 
-Start the server
+Start the frontend (Next.js dev server, port 3000)
 
 ```bash
-  pnpm run dev
+  pnpm dev
 ```
 
+In a second terminal, start the API worker (Wrangler dev server, port 8787) — the frontend calls it at `NEXT_PUBLIC_API_BASE_URL` (see `apps/web/.env.local.example`)
+
+```bash
+  pnpm --filter @benford/worker dev
+```
 
 ## Tech Stack
 
-Vue.js 3, Vuetify
+Next.js (static export) + React, Tailwind CSS, Radix UI, TanStack Query, Zustand, Chart.js — deployed as a Cloudflare Worker (static assets + a small edge API that proxies/caches/normalizes the Our World in Data API). The Benford statistics themselves live in a framework-independent package, `packages/stats`.
 
 ## Authors
 
@@ -50,4 +54,3 @@ Vue.js 3, Vuetify
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
