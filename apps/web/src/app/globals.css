@@ -1,0 +1,174 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Surfaces — warm "paper" neutral. background < surface < surface-elevated */
+  --background: oklch(0.97 0.004 75);
+  --surface: oklch(0.995 0.003 75);
+  --surface-elevated: oklch(1 0.002 75);
+
+  /* Text */
+  --text-primary: oklch(0.18 0.01 75);
+  --text-secondary: oklch(0.38 0.01 75);
+  --text-muted: oklch(0.55 0.01 75);
+  --text-inverse: oklch(0.98 0.004 75);
+
+  /* Border / divider */
+  --border: oklch(0.88 0.006 75);
+  --divider: oklch(0.92 0.004 75);
+
+  /* Accent — instrument teal (primary action + informational signal) */
+  --accent: oklch(0.52 0.12 215);
+  --accent-foreground: oklch(0.99 0.004 75);
+  --accent-hover: oklch(0.46 0.13 215);
+  --accent-muted: oklch(0.9 0.04 215);
+
+  /* Semantic status — kept dark enough (L≈0.46) to clear WCAG AA (4.5:1) as
+     text both directly on --surface/--background and on each color's own
+     "-muted" pill background; lighter values here read fine as decorative
+     fills but fail contrast as badge/error text (verified against the
+     specific L values below, not just eyeballed). */
+  --success: oklch(0.46 0.11 150);
+  --success-foreground: oklch(0.99 0 0);
+  --success-muted: oklch(0.93 0.05 150);
+  --warning: oklch(0.46 0.09 70);
+  --warning-foreground: oklch(0.99 0 0);
+  --warning-muted: oklch(0.94 0.06 70);
+  --error: oklch(0.46 0.17 25);
+  --error-foreground: oklch(0.99 0 0);
+  --error-muted: oklch(0.93 0.06 25);
+
+  /* Chart palette — kept separate from UI tokens so chart contrast can be
+     tuned independently of button/badge tuning */
+  --chart-observed: var(--accent);
+  --chart-expected: oklch(0.55 0.01 75 / 0.5);
+  --chart-grid: oklch(0.88 0.006 75 / 0.6);
+  --chart-axis-text: oklch(0.5 0.01 75);
+  --chart-flag-05: var(--warning);
+  --chart-flag-01: var(--error);
+
+  /* Shadows — Tailwind's built-in shadow-sm/md/lg utilities compile to a
+     literal box-shadow value at build time (verified in the compiled CSS
+     output) rather than a var() reference, so they can't be made
+     theme-reactive the way --color-* tokens are via @theme inline. These
+     --elevation-* variables back the .shadow-elevation-* classes defined
+     below instead, which explicitly reference var() and do update on
+     theme change. Tailwind's defaults are tuned for light surfaces only —
+     the .dark block overrides these with darker, tighter values. */
+  --elevation-sm: 0 1px 2px 0 oklch(0.2 0 0 / 0.06);
+  --elevation-md: 0 4px 12px -2px oklch(0.2 0 0 / 0.1);
+  --elevation-lg: 0 12px 32px -8px oklch(0.2 0 0 / 0.16);
+}
+
+.dark {
+  --background: oklch(0.15 0.006 250);
+  --surface: oklch(0.2 0.006 250);
+  --surface-elevated: oklch(0.25 0.006 250);
+
+  --text-primary: oklch(0.96 0.006 250);
+  --text-secondary: oklch(0.8 0.006 250);
+  --text-muted: oklch(0.62 0.01 250);
+  --text-inverse: oklch(0.15 0.006 250);
+
+  --border: oklch(0.32 0.008 250);
+  --divider: oklch(0.27 0.008 250);
+
+  --accent: oklch(0.72 0.13 215);
+  --accent-foreground: oklch(0.12 0.01 215);
+  --accent-hover: oklch(0.78 0.13 215);
+  --accent-muted: oklch(0.28 0.05 215);
+
+  --success: oklch(0.72 0.15 150);
+  --success-foreground: oklch(0.12 0.02 150);
+  --success-muted: oklch(0.26 0.06 150);
+  --warning: oklch(0.76 0.14 70);
+  --warning-foreground: oklch(0.16 0.02 70);
+  --warning-muted: oklch(0.3 0.06 70);
+  --error: oklch(0.68 0.19 25);
+  --error-foreground: oklch(0.12 0.02 25);
+  --error-muted: oklch(0.28 0.08 25);
+
+  --chart-observed: var(--accent);
+  --chart-expected: oklch(0.8 0.01 250 / 0.45);
+  --chart-grid: oklch(0.32 0.008 250 / 0.6);
+  --chart-axis-text: oklch(0.68 0.01 250);
+  --chart-flag-05: var(--warning);
+  --chart-flag-01: var(--error);
+
+  --elevation-sm: 0 1px 2px 0 oklch(0 0 0 / 0.4);
+  --elevation-md: 0 4px 12px -2px oklch(0 0 0 / 0.5);
+  --elevation-lg: 0 16px 40px -8px oklch(0 0 0 / 0.6);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--text-primary);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-text-secondary: var(--text-secondary);
+  --color-muted-foreground: var(--text-muted);
+  --color-text-inverse: var(--text-inverse);
+
+  --color-border: var(--border);
+  --color-divider: var(--divider);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-muted: var(--accent-muted);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-muted: var(--success-muted);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-muted: var(--warning-muted);
+  --color-error: var(--error);
+  --color-error-foreground: var(--error-foreground);
+  --color-error-muted: var(--error-muted);
+
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
+
+/* Narrow tool for numerals embedded in ordinary prose that don't warrant
+   switching the whole phrase to the monospace face (font-mono is the
+   primary numeric treatment — see components that render tables/stats). */
+.font-numeric {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+.shadow-elevation-sm {
+  box-shadow: var(--elevation-sm);
+}
+
+.shadow-elevation-lg {
+  box-shadow: var(--elevation-lg);
+}
+
+/* Global focus-visible ring — previously only the year-slider thumb had one */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -2,14 +2,18 @@
 import antfu from '@antfu/eslint-config'
 
 export default antfu({
-  vue: {
-    overrides: {
-      'vue/max-attributes-per-line': 'error',
-      'vue/v-bind-style': ['error', 'shorthand', {
-        sameNameShorthand: 'always',
-      }],
-    },
-
+  react: true,
+  nextjs: true,
+  typescript: true,
+  ignores: ['**/.next/**', '**/dist/**', '**/.wrangler/**', '**/worker-configuration.d.ts', '**/next-env.d.ts'],
+}, {
+  rules: {
+    // Next.js App Router requires exporting `metadata` alongside the default
+    // component in layout/page files — Next's own Fast Refresh (Turbopack)
+    // handles this fine, unlike the Vite-oriented refresh model this rule assumes.
+    'react-refresh/only-export-components': 'off',
+    // process.env is how Next.js exposes build-time env vars in client code;
+    // `require('process')` doesn't apply outside a CommonJS/Node runtime.
+    'node/prefer-global/process': 'off',
   },
-  ignores: ['src/vite-env.d.ts'],
 })
